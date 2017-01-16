@@ -113,6 +113,44 @@ class WP_SEO_Social_Settings {
 			$array = array_merge( $array, $this->fields_to_whitelist );
 			return $array;
 		});
+
+		add_filter( 'wp_seo_arbitrary_tags', function( $arbitrary_tags ) {
+			$pretags = array();
+			$tags = array();
+			$key = WP_SEO()->get_key();
+			if ( false !== strpos( $key, 'single_' ) ) {
+				$post_type = get_post_type();
+				if ( WP_SEO_Settings()->has_post_fields( $post_type ) ) {
+					foreach ( $this->fields_to_whitelist as $field ) {
+						$pretags[ $field ] = WP_SEO()->format( get_post_meta( get_the_ID(), '_meta_' . $field, true ) );
+					}
+				}
+			} elseif ( false !== strpos( $key, 'archive_' ) ) {
+				if ( WP_SEO_Settings()->has_term_fields( $taxonomy = get_queried_object()->taxonomy ) && $option = get_option( WP_SEO()->get_term_option_name( get_queried_object() ) ) ) {
+					foreach ( $this->fields_to_whitelist as $field ) {
+						$pretags[ $field ] = WP_SEO()->format( $option[ $field ] );
+					}
+				}
+			}
+
+			foreach ( $pretags as $key => $value ) {
+				if ( $value && ! is_wp_error( $value ) ) {
+					$tags[] = array(
+						'name' => $key,
+						'content' => $value,
+					);
+				}
+			}
+			$arbitrary_tags = array_merge(
+				$arbitrary_tags,
+				$tags
+			);
+			return $arbitrary_tags;
+		} );
+	}
+
+	public function wp_seo_social_generate_meta() {
+		return array();
 	}
 
 	/**
