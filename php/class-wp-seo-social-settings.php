@@ -53,6 +53,18 @@ class WP_SEO_Social_Settings {
 	private $text_fields = array();
 
 	/**
+	 * Fields to whitelist.
+	 *
+	 * @var array Field ID's to whitelist.
+	 */
+	private $fields_to_whitelist = array(
+		'og_title',
+		'og_description',
+		'og_image',
+		'og_type',
+	);
+
+	/**
 	 * The default options to save.
 	 *
 	 * @var array.
@@ -86,6 +98,20 @@ class WP_SEO_Social_Settings {
 		add_filter( 'wp_seo_sanitize', array( $this, 'sanitize' ), 10, 2 );
 		add_filter( 'wp_seo_options_page_menu_title', function() {
 			return __( 'SEO & Social', 'wp-seo' );
+		});
+		add_filter( 'wp_seo_intersect_term_option', function( $array ) {
+			$extra_fields = array(
+				'og_title'         => '',
+				'og_description'   => '',
+				'og_image'         => '',
+				'og_type'          => '',
+			);
+			$array = array_merge( $array, $extra_fields );
+			return $array;
+		});
+		add_filter( 'wp_seo_whitelisted_fields', function( $array ) {
+			$array = array_merge( $array, $this->fields_to_whitelist );
+			return $array;
 		});
 	}
 

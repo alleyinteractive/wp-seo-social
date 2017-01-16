@@ -11,9 +11,9 @@ add_action( 'wp_seo_add_term_meta_fields',      'wp_seo_social_the_meta_fields_t
 add_action( 'wp_seo_edit_term_meta_fields',     'wp_seo_social_the_meta_fields_edit_term' );
 
 $slugs = array(
-	'post_id'    => 'post',
-	'term_id'    => 'add_term',
-	'edit_term'
+	'post'      => 'post_id',
+	'add_term'  => 'term_id',
+	'edit_term' => 'term_id',
 );
 
 $settings_fields = array(
@@ -23,7 +23,7 @@ $settings_fields = array(
 	'og_type',
 );
 
-foreach ( $slugs as $object => $slug ) {
+foreach ( $slugs as $slug => $id ) {
 	foreach ( $settings_fields as $field ) {
 		switch ( $field ) {
 			case 'og_title':
@@ -34,11 +34,11 @@ foreach ( $slugs as $object => $slug ) {
 				);
 				add_action(
 					'wp_seo_social_' . $slug . '_meta_fields_' . $field . '_input',
-					'wp_seo_social_' . $object . '_to_the_' . $slug . '_meta_' . $field . '_input'
+					'wp_seo_social_' . $id . '_to_the_' . $slug . '_meta_' . $field . '_input'
 				);
 				add_action(
 					'wp_seo_social_' . $slug . '_meta_fields_after_' . $field . '_input',
-					'wp_seo_social_' . $object . '_to_the_' . $field . '_character_count'
+					'wp_seo_social_' . $id . '_to_the_' . $field . '_character_count'
 				);
 				break;
 			case 'og_image':
@@ -49,7 +49,7 @@ foreach ( $slugs as $object => $slug ) {
 				);
 				add_action(
 					'wp_seo_social_' . $slug . '_meta_fields_' . $field . '_input',
-					'wp_seo_social_' . $object . '_to_the_' . $slug . '_meta_' . $field . '_input'
+					'wp_seo_social_' . $id . '_to_the_' . $slug . '_meta_' . $field . '_input'
 				);
 				break;
 		}
