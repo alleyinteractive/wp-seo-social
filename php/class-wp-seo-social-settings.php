@@ -122,7 +122,8 @@ class WP_SEO_Social_Settings {
 				$post_type = get_post_type();
 				if ( WP_SEO_Settings()->has_post_fields( $post_type ) ) {
 					foreach ( $this->fields_to_whitelist as $field ) {
-						$pretags[ $field ] = WP_SEO()->format( get_post_meta( get_the_ID(), '_meta_' . $field, true ) );
+						$field_string = apply_filters( 'wp_seo_meta_description_format', get_post_meta( get_the_ID(), '_meta_' . $field, true ) , $key );
+						$pretags[ $field ] = WP_SEO()->format( $field_string );
 					}
 				}
 			} elseif ( false !== strpos( $key, 'archive_' ) ) {
@@ -130,6 +131,25 @@ class WP_SEO_Social_Settings {
 					foreach ( $this->fields_to_whitelist as $field ) {
 						$pretags[ $field ] = WP_SEO()->format( $option[ $field ] );
 					}
+				}
+			} else {
+				foreach ( $this->fields_to_whitelist as $field ) {
+					$prefield = apply_filters( 'wp_seo_' . $field . '_tag_format', WP_SEO_Settings()->get_option( $key ), $key );
+					$pretags[ $field ] = WP_SEO()->format( $prefield );
+				}
+			}
+
+			foreach ( $this->fields_to_whitelist as $field ) {
+				if ( empty( $pretags[ $field ] ) ) {
+					/**
+					 * Filter the format string of the meta description for this page.
+					 *
+					 * @param  string 		The format string retrieved from the settings.
+					 * @param  string $key	The key of the setting retrieved.
+					 */
+					$field_string = apply_filters( 'wp_seo_meta_' . $field . '_format', WP_SEO_Settings()->get_option( "{$key}_' . $field " ), $key );
+					$meta_field_value = WP_SEO()->format( $field_string );
+					$pretags[ $field ] = $meta_field_value;
 				}
 			}
 
