@@ -128,7 +128,7 @@ class WP_SEO_Social_Settings {
 			} elseif ( is_category() || is_tag() || is_tax() ) {
 				if ( WP_SEO_Settings()->has_term_fields( $taxonomy = get_queried_object()->taxonomy ) && $option = get_option( WP_SEO()->get_term_option_name( get_queried_object() ) ) ) {
 					foreach ( $this->fields_to_whitelist as $field ) {
-						if ( isset( $option[ $field ] ) ){
+						if ( isset( $option[ $field ] ) ) {
 							$field_string = $option[ $field ];
 							$pretags[ $field ] = $field_string;
 						}
@@ -147,7 +147,7 @@ class WP_SEO_Social_Settings {
 					$meta_field_value = WP_SEO()->format( $field_string );
 					$pretags[ $field ] = $meta_field_value;
 				} else {
-					$pretags[ $field ] = WP_SEO()->format($pretags[ $field ] );
+					$pretags[ $field ] = WP_SEO()->format( $pretags[ $field ] );
 				}
 			}
 			foreach ( $pretags as $key => $value ) {
@@ -677,8 +677,7 @@ class WP_SEO_Social_Settings {
 			);
 
 			// While we're looping handle categorizing fields for sanitization
-			if ( ! isset(
-				$setting['args']['type'] )
+			if ( ! isset( $setting['args']['type'] )
 				|| 'textarea' === $setting['args']['type']
 				|| 'dropdown' === $setting['args']['type']
 				|| 'image' === $setting['args']['type']
