@@ -138,7 +138,6 @@ class WP_SEO_Social_Settings {
 					$pretags[ $field ] = WP_SEO()->format( $prefield );
 				}
 			}
-
 			foreach ( $this->fields_to_whitelist as $field ) {
 				if ( empty( $pretags[ $field ] ) ) {
 					/**
@@ -147,12 +146,11 @@ class WP_SEO_Social_Settings {
 					 * @param  string 		The format string retrieved from the settings.
 					 * @param  string $key	The key of the setting retrieved.
 					 */
-					$field_string = apply_filters( 'wp_seo_meta_' . $field . '_format', WP_SEO_Settings()->get_option( "{$key}_' . $field " ), $key );
+					$field_string = apply_filters( 'wp_seo_meta_' . $field . '_format', WP_SEO_Settings()->get_option( $key . '_' . $field ), $key );
 					$meta_field_value = WP_SEO()->format( $field_string );
 					$pretags[ $field ] = $meta_field_value;
 				}
 			}
-
 			foreach ( $pretags as $key => $value ) {
 				if ( $value && ! is_wp_error( $value ) ) {
 					$tags[] = array(
@@ -184,6 +182,7 @@ class WP_SEO_Social_Settings {
 		foreach ( $sanitize_as_text_field as $field ) {
 			$out[ $field ] = isset( $in[ $field ] ) && is_string( $in[ $field ] ) ? sanitize_text_field( $in[ $field ] ) : null;
 		}
+
 		return $out;
 	}
 
@@ -635,7 +634,7 @@ class WP_SEO_Social_Settings {
 			);
 
 			// While we're looping handle categorizing fields for sanitization
-			if ( ! isset( $setting['args']['type'] ) || ! in_array( $setting['args']['type'], WP_SEO_Settings()->field_types, true ) ) {
+			if ( ! isset( $setting['args']['type'] ) || 'textarea' === $setting['args']['type'] || ! in_array( $setting['args']['type'], WP_SEO_Settings()->field_types, true ) ) {
 				$this->text_fields[] = $setting['id'];
 			}
 		}
