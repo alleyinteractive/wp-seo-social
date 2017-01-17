@@ -118,24 +118,21 @@ class WP_SEO_Social_Settings {
 			$pretags = array();
 			$tags = array();
 			$key = WP_SEO()->get_key();
-			if ( false !== strpos( $key, 'single_' ) ) {
-				$post_type = get_post_type();
-				if ( WP_SEO_Settings()->has_post_fields( $post_type ) ) {
+			if ( is_singular() ) {
+				if ( WP_SEO_Settings()->has_post_fields( $post_type = get_post_type() ) ) {
 					foreach ( $this->fields_to_whitelist as $field ) {
-						$field_string = apply_filters( 'wp_seo_meta_description_format', get_post_meta( get_the_ID(), '_meta_' . $field, true ) , $key );
-						$pretags[ $field ] = WP_SEO()->format( $field_string );
+						$field_string = get_post_meta( get_the_ID(), '_meta_' . $field, true );
+						$pretags[ $field ] = $field_string;
 					}
 				}
-			} elseif ( false !== strpos( $key, 'archive_' ) ) {
+			} elseif ( is_category() || is_tag() || is_tax() ) {
 				if ( WP_SEO_Settings()->has_term_fields( $taxonomy = get_queried_object()->taxonomy ) && $option = get_option( WP_SEO()->get_term_option_name( get_queried_object() ) ) ) {
 					foreach ( $this->fields_to_whitelist as $field ) {
-						$pretags[ $field ] = WP_SEO()->format( $option[ $field ] );
+						if ( isset( $option[ $field ] ) ){
+							$field_string = $option[ $field ];
+							$pretags[ $field ] = $field_string;
+						}
 					}
-				}
-			} else {
-				foreach ( $this->fields_to_whitelist as $field ) {
-					$prefield = apply_filters( 'wp_seo_' . $field . '_tag_format', WP_SEO_Settings()->get_option( $key ), $key );
-					$pretags[ $field ] = WP_SEO()->format( $prefield );
 				}
 			}
 			foreach ( $this->fields_to_whitelist as $field ) {
@@ -147,8 +144,12 @@ class WP_SEO_Social_Settings {
 					 * @param  string $key	The key of the setting retrieved.
 					 */
 					$field_string = apply_filters( 'wp_seo_meta_' . $field . '_format', WP_SEO_Settings()->get_option( $key . '_' . $field ), $key );
+					if ( 'single_post' === $key && 'og_title' === $field ) {
+					}
 					$meta_field_value = WP_SEO()->format( $field_string );
 					$pretags[ $field ] = $meta_field_value;
+				} else {
+					$pretags[ $field ] = WP_SEO()->format($pretags[ $field ] );
 				}
 			}
 			foreach ( $pretags as $key => $value ) {
@@ -178,7 +179,6 @@ class WP_SEO_Social_Settings {
 		foreach ( $sanitize_as_text_field as $field ) {
 			$out[ $field ] = isset( $in[ $field ] ) && is_string( $in[ $field ] ) ? sanitize_text_field( $in[ $field ] ) : null;
 		}
-
 		return $out;
 	}
 
@@ -634,7 +634,6 @@ class WP_SEO_Social_Settings {
 				$this->text_fields[] = $setting['id'];
 			}
 		}
-
 	}
 
 }

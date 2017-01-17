@@ -5,6 +5,25 @@
  *
  * @see https://core.trac.wordpress.org/changeset/29860.
  */
+function _wp_seo_reset_post_types() {
+	foreach ( get_post_types() as $pt ) {
+		_unregister_post_type( $pt );
+	}
+	create_initial_post_types();
+}
+
+/**
+ * Mimic WP_UnitTestCase::reset_taxonomies() for supporting older versions of WP.
+ *
+ * @see https://core.trac.wordpress.org/changeset/29860.
+ */
+function _wp_seo_reset_taxonomies() {
+	foreach ( get_taxonomies() as $tax ) {
+		_unregister_taxonomy( $tax );
+	}
+	create_initial_taxonomies();
+}
+
 $_tests_dir = getenv( 'WP_TESTS_DIR' );
 
 if ( ! $_tests_dir ) {
