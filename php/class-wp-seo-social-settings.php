@@ -551,7 +551,7 @@ class WP_SEO_Social_Settings {
 					array(
 						'id'       => 'archive_' . $taxonomy->name . '_og_image',
 						'title'    => __( 'Open Graph Image', 'wp-seo-social' ),
-						'section'  => 'archive_' . $taxonomy->name . '_og_description',
+						'section'  => 'archive_' . $taxonomy->name,
 						'args'     => array(
 							'field' => 'archive_' . $taxonomy->name . '_og_image',
 							'type'  => 'image',
