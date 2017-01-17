@@ -50,14 +50,14 @@ class WP_SEO_Social_Settings {
 	 *
 	 * @var array Field ID's.
 	 */
-	private $text_fields = array();
+	private $handle_as_text = array();
 
 	/**
 	 * Fields to whitelist.
 	 *
 	 * @var array Field ID's to whitelist.
 	 */
-	private $fields_to_whitelist = array(
+	public $fields_to_whitelist = array(
 		'og_title',
 		'og_description',
 		'og_image',
@@ -144,8 +144,6 @@ class WP_SEO_Social_Settings {
 					 * @param  string $key	The key of the setting retrieved.
 					 */
 					$field_string = apply_filters( 'wp_seo_meta_' . $field . '_format', WP_SEO_Settings()->get_option( $key . '_' . $field ), $key );
-					if ( 'single_post' === $key && 'og_title' === $field ) {
-					}
 					$meta_field_value = WP_SEO()->format( $field_string );
 					$pretags[ $field ] = $meta_field_value;
 				} else {
@@ -175,10 +173,11 @@ class WP_SEO_Social_Settings {
 	 * @return array     The options, sanitized.
 	 */
 	public function sanitize( $out, $in ) {
-		$sanitize_as_text_field = $this->text_fields;
+		$sanitize_as_text_field = $this->handle_as_text;
 		foreach ( $sanitize_as_text_field as $field ) {
 			$out[ $field ] = isset( $in[ $field ] ) && is_string( $in[ $field ] ) ? sanitize_text_field( $in[ $field ] ) : null;
 		}
+		xdebug_break();
 		return $out;
 	}
 
@@ -312,6 +311,7 @@ class WP_SEO_Social_Settings {
 				'section'  => 'home',
 				'args'     => array(
 					'field' => 'home_og_image',
+					'type'  => 'image',
 				),
 			),
 			array(
@@ -320,6 +320,11 @@ class WP_SEO_Social_Settings {
 				'section'  => 'home',
 				'args'     => array(
 					'field' => 'home_og_type',
+					'type'  => 'dropdown',
+					'boxes' => array(
+						'website' => 'Website',
+						'article' => 'Article',
+					),
 				),
 			),
 			array(
@@ -377,6 +382,7 @@ class WP_SEO_Social_Settings {
 				'section'  => 'archive_author',
 				'args'     => array(
 					'field' => 'archive_author_og_image',
+					'type'  => 'image',
 				),
 			),
 			array(
@@ -385,6 +391,11 @@ class WP_SEO_Social_Settings {
 				'section'  => 'archive_author',
 				'args'     => array(
 					'field' => 'archive_author_og_type',
+					'type'  => 'dropdown',
+					'boxes' => array(
+						'website' => 'Website',
+						'article' => 'Article',
+					),
 				),
 			),
 			array(
@@ -410,6 +421,7 @@ class WP_SEO_Social_Settings {
 				'section'  => 'archive_date',
 				'args'     => array(
 					'field' => 'archive_date_og_image',
+					'type'  => 'image',
 				),
 			),
 			array(
@@ -418,6 +430,11 @@ class WP_SEO_Social_Settings {
 				'section'  => 'archive_date',
 				'args'     => array(
 					'field' => 'archive_date_og_type',
+					'type'  => 'dropdown',
+					'boxes' => array(
+						'website' => 'Website',
+						'article' => 'Article',
+					),
 				),
 			),
 			array(
@@ -443,6 +460,7 @@ class WP_SEO_Social_Settings {
 				'section'  => 'search',
 				'args'     => array(
 					'field' => 'search_og_image',
+					'type'  => 'image',
 				),
 			),
 			array(
@@ -451,6 +469,11 @@ class WP_SEO_Social_Settings {
 				'section'  => 'search',
 				'args'     => array(
 					'field' => 'search_og_type',
+					'type'  => 'dropdown',
+					'boxes' => array(
+						'website' => 'Website',
+						'article' => 'Article',
+					),
 				),
 			),
 			array(
@@ -476,6 +499,7 @@ class WP_SEO_Social_Settings {
 				'section'  => '404',
 				'args'     => array(
 					'field' => '404_og_image',
+					'type'  => 'image',
 				),
 			),
 			array(
@@ -484,6 +508,11 @@ class WP_SEO_Social_Settings {
 				'section'  => '404',
 				'args'     => array(
 					'field' => '404_og_type',
+					'type'  => 'dropdown',
+					'boxes' => array(
+						'website' => 'Website',
+						'article' => 'Article',
+					),
 				),
 			),
 		);
@@ -514,7 +543,8 @@ class WP_SEO_Social_Settings {
 						'title'    => __( 'Open Graph Image', 'wp-seo-social' ),
 						'section'  => 'archive_' . $taxonomy->name . '_og_description',
 						'args'     => array(
-							'field' => 'home_og_image',
+							'field' => 'archive_' . $taxonomy->name . '_og_image',
+							'type'  => 'image',
 						),
 					),
 					array(
@@ -523,6 +553,11 @@ class WP_SEO_Social_Settings {
 						'section'  => 'archive_' . $taxonomy->name,
 						'args'     => array(
 							'field' => 'archive_' . $taxonomy->name . '_og_type',
+							'type'  => 'dropdown',
+							'boxes' => array(
+								'website' => 'Website',
+								'article' => 'Article',
+							),
 						),
 					),
 				)
@@ -554,9 +589,10 @@ class WP_SEO_Social_Settings {
 					array(
 						'id'       => 'single_' . $post_type->name . '_og_image',
 						'title'    => __( 'Open Graph Image', 'wp-seo-social' ),
-						'section'  => 'single_' . $post_type->name . '_og_description',
+						'section'  => 'single_' . $post_type->name,
 						'args'     => array(
-							'field' => 'home_og_image',
+							'field' => 'single_' . $post_type->name . '_og_image',
+							'type'  => 'image',
 						),
 					),
 					array(
@@ -565,6 +601,11 @@ class WP_SEO_Social_Settings {
 						'section'  => 'single_' . $post_type->name,
 						'args'     => array(
 							'field' => 'single_' . $post_type->name . '_og_type',
+							'type'  => 'dropdown',
+							'boxes' => array(
+								'website' => 'Website',
+								'article' => 'Article',
+							),
 						),
 					),
 				)
@@ -598,7 +639,8 @@ class WP_SEO_Social_Settings {
 						'title'    => __( 'Open Graph Image', 'wp-seo-social' ),
 						'section'  => 'archive_' . $post_type->name . '_og_description',
 						'args'     => array(
-							'field' => 'home_og_image',
+							'field' => 'archive_' . $post_type->name . '_og_image',
+							'type'  => 'image',
 						),
 					),
 					array(
@@ -607,6 +649,11 @@ class WP_SEO_Social_Settings {
 						'section'  => 'archive_' . $post_type->name,
 						'args'     => array(
 							'field' => 'archive_' . $post_type->name . '_og_type',
+							'type'  => 'dropdown',
+							'boxes' => array(
+								'website' => 'Website',
+								'article' => 'Article',
+							),
 						),
 					),
 				)
@@ -630,8 +677,14 @@ class WP_SEO_Social_Settings {
 			);
 
 			// While we're looping handle categorizing fields for sanitization
-			if ( ! isset( $setting['args']['type'] ) || 'textarea' === $setting['args']['type'] || ! in_array( $setting['args']['type'], WP_SEO_Settings()->field_types, true ) ) {
-				$this->text_fields[] = $setting['id'];
+			if ( ! isset(
+				$setting['args']['type'] )
+				|| 'textarea' === $setting['args']['type']
+				|| 'dropdown' === $setting['args']['type']
+				|| 'image' === $setting['args']['type']
+				|| ! in_array( $setting['args']['type'], WP_SEO_Settings()->field_types, true )
+			) {
+				$this->handle_as_text[] = $setting['id'];
 			}
 		}
 	}

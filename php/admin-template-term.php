@@ -11,15 +11,9 @@
  * @param WP_term $taxonomy Term object of the term being edited.
  */
 function wp_seo_social_the_meta_fields_edit_term( $term ) {
-	$fields = array(
-		'og_title',
-		'og_description',
-		'og_image',
-		'og_type',
-	);
 	$slug = 'edit_term';
 	wp_seo_social_edit_term_opening_markup();
-	foreach ( $fields as $field ) :
+	foreach ( WP_SEO_Social_Settings()->fields_to_whitelist as $field ) :
 		wp_seo_social_generate_field_markup_term( $slug, $field, $term );
 	endforeach;
 	wp_seo_social_edit_term_closing_markup();
@@ -47,15 +41,9 @@ function wp_seo_social_edit_term_closing_markup() {
  * @param WP_term $taxonomy Term object of the term being edited.
  */
 function wp_seo_social_the_meta_fields_term() {
-	$fields = array(
-		'og_title',
-		'og_description',
-		'og_image',
-		'og_type',
-	);
 	$slug = 'add_term';
 	wp_seo_social_term_opening_markup();
-	foreach ( $fields as $field ) :
+	foreach ( WP_SEO_Social_Settings()->fields_to_whitelist as $field ) :
 		wp_seo_social_generate_field_markup_term( $slug, $field );
 	endforeach;
 	wp_seo_social_term_closing_markup();

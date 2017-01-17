@@ -11,15 +11,9 @@
  * @param WP_Post $post Post object of the post being edited.
  */
 function wp_seo_social_the_meta_fields( $post ) {
-	$fields = array(
-		'og_title',
-		'og_description',
-		'og_image',
-		'og_type',
-	);
 	$slug = 'post';
 	wp_seo_social_table_opening_markup( $slug );
-	foreach ( $fields as $field ) :
+	foreach ( WP_SEO_Social_Settings()->fields_to_whitelist as $field ) :
 		wp_seo_social_generate_field_markup( $slug, $field, $post );
 	endforeach;
 	wp_seo_social_table_closing_markup();
