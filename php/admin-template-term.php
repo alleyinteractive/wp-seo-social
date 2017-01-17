@@ -8,7 +8,7 @@
 /**
  * Prints markup and fires actions to construct the WP SEO Social metabox for edit terms.
  *
- * @param WP_term $taxonomy Term object of the term being edited.
+ * @param WP_term $term Term object of the term being edited.
  */
 function wp_seo_social_the_meta_fields_edit_term( $term ) {
 	$slug = 'edit_term';

@@ -42,7 +42,7 @@ function wp_seo_social_the_og_description_character_count( $count ) {
 }
 
 /**
- * Prints a form label for a meta OG title input.
+ * Prints a form label for a meta OG image input.
  */
 function wp_seo_social_the_meta_og_image_label() {
 	?>
@@ -50,7 +50,7 @@ function wp_seo_social_the_meta_og_image_label() {
 <?php }
 
 /**
- * Prints a form input for a meta OG title.
+ * Prints a form input for a meta OG image.
  *
  * @param string $value The input's current value.
  */
@@ -62,7 +62,7 @@ function wp_seo_social_the_meta_og_image_input( $value ) {
 }
 
 /**
- * Prints a form label for a meta OG title input.
+ * Prints a form label for a meta OG type input.
  */
 function wp_seo_social_the_meta_og_type_label() {
 	?>
@@ -70,7 +70,7 @@ function wp_seo_social_the_meta_og_type_label() {
 <?php }
 
 /**
- * Prints a form input for a meta OG title.
+ * Prints a form input for a meta OG type.
  *
  * @param string $value The input's current value.
  */

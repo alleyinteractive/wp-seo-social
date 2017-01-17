@@ -25,11 +25,6 @@
  */
 
 if ( ! class_exists( 'WP_SEO_Social' ) ) :
-
 	define( 'WP_SEO_SOCIAL_PATH', dirname( __FILE__ ) );
-	define( 'WP_SEO_SOCIAL_URL', trailingslashit( plugins_url( '', __FILE__ ) ) );
-
-	// Core filters for the page title and meta tags, and post and term metaboxes.
 	require_once WP_SEO_SOCIAL_PATH . '/php/class-wp-seo-social.php';
-
 endif;

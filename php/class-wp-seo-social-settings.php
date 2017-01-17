@@ -276,7 +276,6 @@ class WP_SEO_Social_Settings {
 	 * Register the plugin settings.
 	 */
 	public function register_settings() {
-		// Add our pages first
 		$social_sections = array(
 			array(
 				'section'  => 'social_post_types',
@@ -573,7 +572,6 @@ class WP_SEO_Social_Settings {
 				)
 			);
 		}
-		// Single post defaults
 		$post_settings = array();
 		foreach ( $this->single_post_types as $post_type ) {
 			$post_settings = array_merge(
@@ -621,7 +619,6 @@ class WP_SEO_Social_Settings {
 				)
 			);
 		}
-		// Archived post settings
 		$archived_post_settings = array();
 		foreach ( $this->archived_post_types as $post_type ) {
 			$archived_post_settings = array_merge(
@@ -675,7 +672,6 @@ class WP_SEO_Social_Settings {
 			$post_settings,
 			$archived_post_settings
 		);
-
 		foreach ( $all_settings as $setting ) {
 			add_settings_field(
 				$setting['id'],
@@ -685,8 +681,6 @@ class WP_SEO_Social_Settings {
 				$setting['section'],
 				$setting['args']
 			);
-
-			// While we're looping handle categorizing fields for sanitization
 			if ( ! isset( $setting['args']['type'] )
 				|| 'textarea' === $setting['args']['type']
 				|| 'dropdown' === $setting['args']['type']

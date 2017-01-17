@@ -15,7 +15,7 @@ class WP_SEO_Social {
 	 *
 	 * @var object
 	 */
-	private static $instance = null;
+	private static $_instance = null;
 
 	/**
 	 * Admin notices.
@@ -36,12 +36,8 @@ class WP_SEO_Social {
 	 */
 	protected function setup() {
 		if ( class_exists( 'WP_SEO' ) ) :
-			// Settings page and option management.
 			require_once WP_SEO_SOCIAL_PATH . '/php/class-wp-seo-social-settings.php';
-
-			// Settings page and option management.
 			require_once WP_SEO_SOCIAL_PATH . '/php/social-filters.php';
-
 			if ( is_admin() ) :
 				require_once WP_SEO_SOCIAL_PATH . '/php/admin-functions-post.php';
 				require_once WP_SEO_SOCIAL_PATH . '/php/admin-functions-term.php';
@@ -50,7 +46,7 @@ class WP_SEO_Social {
 				require_once WP_SEO_SOCIAL_PATH . '/php/admin-template-post.php';
 			endif;
 		else :
-			$this->_admin_notices['error'][] = __( 'WP SEO is required to use WP SEO Social', 'wp-seo-social' );
+			$this->admin_notices['error'][] = __( 'WP SEO is required to use WP SEO Social', 'wp-seo-social' );
 			add_action( 'admin_notices', array( $this, 'admin_notices' ) );
 			add_action( 'admin_init', array( $this, 'deactivate' ) );
 		endif;
@@ -62,11 +58,11 @@ class WP_SEO_Social {
 	 * @codeCoverageIgnore
 	 */
 	public static function instance() {
-		if ( ! isset( self::$instance ) ) {
-			self::$instance = new WP_SEO_Social;
-			self::$instance->setup();
+		if ( ! isset( self::$_instance ) ) {
+			self::$_instance = new WP_SEO_Social;
+			self::$_instance->setup();
 		}
-		return self::$instance;
+		return self::$_instance;
 	}
 
 	/**
