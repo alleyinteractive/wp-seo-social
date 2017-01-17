@@ -42,7 +42,7 @@ function wp_seo_social_post_id_to_the_og_description_character_count( $post_id )
 }
 
 /**
- * Call printing function for the OG description input for a given post.
+ * Call printing function for the OG image input for a given post.
  *
  * @param int $post_id Post ID.
  */
@@ -51,7 +51,7 @@ function wp_seo_social_post_id_to_the_post_meta_og_image_input( $post_id ) {
 }
 
 /**
- * Call printing function for the OG description input for a given post.
+ * Call printing function for the OG type input for a given post.
  *
  * @param int $post_id Post ID.
  */
