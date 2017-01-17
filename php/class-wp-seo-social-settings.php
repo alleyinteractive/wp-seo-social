@@ -141,7 +141,7 @@ class WP_SEO_Social_Settings {
 			foreach ( $this->fields_to_whitelist as $field ) {
 				if ( empty( $pretags[ $field ] ) ) {
 					/**
-					 * Filter the format string of the meta description for this page.
+					 * Filter the format strings of whitelisted custom tags.
 					 *
 					 * @param  string 		The format string retrieved from the settings.
 					 * @param  string $key	The key of the setting retrieved.
@@ -165,10 +165,6 @@ class WP_SEO_Social_Settings {
 			);
 			return $arbitrary_tags;
 		} );
-	}
-
-	public function wp_seo_social_generate_meta() {
-		return array();
 	}
 
 	/**
