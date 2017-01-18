@@ -6,6 +6,16 @@
  */
 
 /**
+ * Generates markup for fields in the default WP SEO Social metabox.
+ */
+function wp_seo_social_generate_heading() {
+	echo sprintf(
+		'<h4>%1$s</h4>',
+		esc_html( __( 'Open Graph', 'wp-seo' ) )
+	);
+}
+
+/**
  * Prints markup and fires actions to construct the WP SEO Social metabox for edit terms.
  *
  * @param WP_term $term Term object of the term being edited.
@@ -13,6 +23,7 @@
 function wp_seo_social_the_meta_fields_edit_term( $term ) {
 	$slug = 'edit_term';
 	wp_seo_social_edit_term_opening_markup();
+	wp_seo_social_generate_heading();
 	foreach ( WP_SEO_Social_Settings()->fields_to_whitelist as $field ) :
 		wp_seo_social_generate_field_markup_term( $slug, $field, $term );
 	endforeach;
@@ -43,6 +54,7 @@ function wp_seo_social_edit_term_closing_markup() {
 function wp_seo_social_the_meta_fields_term() {
 	$slug = 'add_term';
 	wp_seo_social_term_opening_markup();
+	wp_seo_social_generate_heading();
 	foreach ( WP_SEO_Social_Settings()->fields_to_whitelist as $field ) :
 		wp_seo_social_generate_field_markup_term( $slug, $field );
 	endforeach;
