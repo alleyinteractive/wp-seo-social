@@ -1,4 +1,9 @@
 <?php
+/**
+ * Bootstrap tests for WP_SEO_Social extension.
+ *
+ * @package WP_SEO_Social
+ */
 
 /**
  * Mimic WP_UnitTestCase::reset_post_types() for supporting older versions of WP.
@@ -32,6 +37,9 @@ if ( ! $_tests_dir ) {
 
 require_once $_tests_dir . '/includes/functions.php';
 
+/**
+ * Load the plugins
+ */
 function _manually_load_plugin() {
 	require dirname( __FILE__ ) . '/../../wp-seo/wp-seo.php';
 	require dirname( __FILE__ ) . '/../wp-seo-social.php';

@@ -48,8 +48,6 @@ function wp_seo_social_edit_term_closing_markup() {
 
 /**
  * Prints markup and fires actions to construct the WP SEO Social metabox for new terms.
- *
- * @param WP_term $taxonomy Term object of the term being edited.
  */
 function wp_seo_social_the_meta_fields_term() {
 	$slug = 'add_term';
@@ -80,9 +78,9 @@ function wp_seo_social_term_closing_markup() {
 /**
  * Generates markup for fields in the add term WP SEO Social metabox.
  *
- * @param $slug String used in markup for context.
- * @param $field String used in markup for field type.
- * @param $taxonomy String of taxonomy being manipulated.
+ * @param string $slug Used in markup for context.
+ * @param string $field Used in markup for field type.
+ * @param string $term Taxonomy being manipulated.
  */
 function wp_seo_social_generate_field_markup_term( $slug, $field, $term = false ) {
 	?>

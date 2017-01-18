@@ -56,6 +56,9 @@ function wp_seo_social_term_data_to_the_meta_og_title_input() {
 
 /**
  * Call printing function for OG title character count for a new term.
+ *
+ * @param integer $term_id Term id.
+ * @param string  $taxonomy Taxonomy.
  */
 function wp_seo_social_term_data_to_the_og_title_character_count( $term_id, $taxonomy ) {
 	wp_seo_social_the_og_title_character_count( 0 );
@@ -63,6 +66,8 @@ function wp_seo_social_term_data_to_the_og_title_character_count( $term_id, $tax
 
 /**
  * Call printing function for the OG title input for a new term.
+ *
+ * @param WP_Term $term Term object.
  */
 function wp_seo_social_term_id_to_the_edit_term_meta_og_title_input( $term ) {
 	$term_option = WP_SEO()->intersect_term_option( (array) WP_SEO()->get_term_option( $term->term_id, $term->taxonomy ) );
@@ -71,6 +76,8 @@ function wp_seo_social_term_id_to_the_edit_term_meta_og_title_input( $term ) {
 
 /**
  * Call printing function for the OG title input for a new term.
+ *
+ * @param WP_Term $term Term object.
  */
 function wp_seo_social_term_id_to_the_edit_term_meta_og_description_input( $term ) {
 	$term_option = WP_SEO()->intersect_term_option( (array) WP_SEO()->get_term_option( $term->term_id, $term->taxonomy ) );
@@ -79,6 +86,8 @@ function wp_seo_social_term_id_to_the_edit_term_meta_og_description_input( $term
 
 /**
  * Call printing function for the OG title input for a new term.
+ *
+ * @param WP_Term $term Term object.
  */
 function wp_seo_social_term_id_to_the_edit_term_meta_og_image_input( $term ) {
 	$term_option = WP_SEO()->intersect_term_option( (array) WP_SEO()->get_term_option( $term->term_id, $term->taxonomy ) );
@@ -87,6 +96,8 @@ function wp_seo_social_term_id_to_the_edit_term_meta_og_image_input( $term ) {
 
 /**
  * Call printing function for the OG title input for a new term.
+ *
+ * @param WP_Term $term Term object.
  */
 function wp_seo_social_term_id_to_the_edit_term_meta_og_type_input( $term ) {
 	$term_option = WP_SEO()->intersect_term_option( (array) WP_SEO()->get_term_option( $term->term_id, $term->taxonomy ) );

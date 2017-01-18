@@ -80,7 +80,6 @@ class WP_SEO_Social_Settings {
 
 	/**
 	 * Get the instance of this class.
-	 *
 	 */
 	public static function instance() {
 		if ( ! isset( self::$instance ) ) {
@@ -89,7 +88,9 @@ class WP_SEO_Social_Settings {
 		}
 		return self::$instance;
 	}
-
+	/**
+	 * Setup the class
+	 */
 	protected function setup() {
 		add_action( 'admin_init', array( $this, 'set_properties' ), 9 );
 		if ( is_admin() ) {
@@ -181,15 +182,15 @@ class WP_SEO_Social_Settings {
 	/**
 	 * Additional sanitization for our new fields
 	 *
-	 * @param  array $in The options as submitted.
-	 * @return array     The options, sanitized.
+	 * @param  array $out The options currently being saved.
+	 * @param  array $in  The options, raw.
+	 * @return array $out The options to save.
 	 */
 	public function sanitize( $out, $in ) {
 		$sanitize_as_text_field = $this->handle_as_text;
 		foreach ( $sanitize_as_text_field as $field ) {
-			$out[ $field ] = isset( $in[ $field ] ) && is_string( $in[ $field ] ) ? sanitize_text_field( $in[ $field ] ) : null;
+			$out[ $field ] = isset( $in[ $field ] ) && ( is_string( $in[ $field ] ) || is_integer( $in[ $field ] ) ) ? sanitize_text_field( $in[ $field ] ) : null;
 		}
-		xdebug_break();
 		return $out;
 	}
 

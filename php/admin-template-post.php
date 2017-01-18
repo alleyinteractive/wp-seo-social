@@ -23,7 +23,7 @@ function wp_seo_social_the_meta_fields( $post ) {
 /**
  * Generates opening markup for the default post SEO Social metabox.
  *
- * @param $slug String used in markup for context.
+ * @param string $slug String used in markup for context.
  */
 function wp_seo_social_table_opening_markup( $slug ) {
 	?>
@@ -41,8 +41,8 @@ function wp_seo_social_table_closing_markup() {
 /**
  * Generates markup for fields in the default WP SEO Social metabox.
  *
- * @param $slug String used in markup for context.
- * @param $field String used in markup for field type.
+ * @param string  $slug Used in markup for context.
+ * @param string  $field Used in markup for field type.
  * @param WP_Post $post Post object of the post being edited.
  */
 function wp_seo_social_generate_field_markup( $slug, $field, $post ) {
