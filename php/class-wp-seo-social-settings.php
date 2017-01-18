@@ -113,7 +113,9 @@ class WP_SEO_Social_Settings {
 			$array = array_merge( $array, $this->fields_to_whitelist );
 			return $array;
 		});
-
+		add_filter( 'wp_seo_box_heading', function( $heading ) {
+			return __( 'Search & Social Optimization', 'wp-seo' );
+		} );
 		add_filter( 'wp_seo_arbitrary_tags', function( $arbitrary_tags ) {
 			$pretags = array();
 			$tags = array();
