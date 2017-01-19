@@ -5,6 +5,7 @@
  * @package WP_SEO_Social
  */
 
+// Add Term context
 /**
  * Call printing function for the OG title input for a new term.
  */
@@ -47,25 +48,9 @@ function wp_seo_social_term_id_to_the_add_term_meta_og_type_input() {
 	wp_seo_social_the_meta_og_type_input( null );
 }
 
+// Edit Term context
 /**
- * Call printing function for the OG title input for a new term.
- */
-function wp_seo_social_term_data_to_the_meta_og_title_input() {
-	wp_seo_social_the_meta_og_title_input( null );
-}
-
-/**
- * Call printing function for OG title character count for a new term.
- *
- * @param integer $term_id Term id.
- * @param string  $taxonomy Taxonomy.
- */
-function wp_seo_social_term_data_to_the_og_title_character_count( $term_id, $taxonomy ) {
-	wp_seo_social_the_og_title_character_count( 0 );
-}
-
-/**
- * Call printing function for the OG title input for a new term.
+ * Call printing function for the OG title input for an existing term.
  *
  * @param WP_Term $term Term object.
  */
@@ -75,7 +60,7 @@ function wp_seo_social_term_id_to_the_edit_term_meta_og_title_input( $term ) {
 }
 
 /**
- * Call printing function for the OG title input for a new term.
+ * Call printing function for the OG title input for an existing term.
  *
  * @param WP_Term $term Term object.
  */
@@ -85,7 +70,7 @@ function wp_seo_social_term_id_to_the_edit_term_meta_og_description_input( $term
 }
 
 /**
- * Call printing function for the OG title input for a new term.
+ * Call printing function for the OG title input for an existing term.
  *
  * @param WP_Term $term Term object.
  */
@@ -95,7 +80,7 @@ function wp_seo_social_term_id_to_the_edit_term_meta_og_image_input( $term ) {
 }
 
 /**
- * Call printing function for the OG title input for a new term.
+ * Call printing function for the OG title input for an existing term.
  *
  * @param WP_Term $term Term object.
  */
