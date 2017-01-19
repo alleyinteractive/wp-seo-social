@@ -38,7 +38,7 @@ foreach ( $slugs as $slug => $id ) {
 				);
 				add_action(
 					'wp_seo_social_' . $slug . '_meta_fields_after_' . $field . '_input',
-					'wp_seo_social_' . $id . '_to_the_' . $field . '_character_count'
+					'wp_seo_social_' . $id . '_to_the_' . $slug . '_' . $field . '_character_count'
 				);
 				break;
 			case 'og_image':
