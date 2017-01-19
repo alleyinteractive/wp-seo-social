@@ -50,7 +50,7 @@ class WP_SEO_Social_Settings {
 	 *
 	 * @var array Field ID's.
 	 */
-	private $handle_as_text = array();
+	public $handle_as_text = array();
 
 	/**
 	 * Fields to whitelist.
@@ -92,108 +92,10 @@ class WP_SEO_Social_Settings {
 	 * Setup the class
 	 */
 	protected function setup() {
-		add_action( 'admin_init', array( $this, 'set_properties' ), 9 );
 		if ( is_admin() ) {
+			add_action( 'admin_init', array( $this, 'set_properties' ), 9 );
 			add_action( 'admin_init', array( $this, 'register_settings' ) );
 		}
-		add_filter( 'wp_seo_sanitize', array( $this, 'sanitize' ), 10, 2 );
-		add_filter( 'wp_seo_options_page_menu_title', function() {
-			return __( 'SEO & Social', 'wp-seo-social' );
-		});
-		add_filter( 'wp_seo_intersect_term_option', function( $array ) {
-			$extra_fields = array(
-				'og_title'         => '',
-				'og_description'   => '',
-				'og_image'         => '',
-				'og_type'          => '',
-			);
-			$array = array_merge( $array, $extra_fields );
-			return $array;
-		});
-		add_filter( 'wp_seo_whitelisted_fields', function( $array ) {
-			$array = array_merge( $array, $this->fields_to_whitelist );
-			return $array;
-		});
-		add_filter( 'wp_seo_box_heading', function( $heading ) {
-			return __( 'Search & Social Optimization', 'wp-seo-social' );
-		} );
-		add_filter( 'wp_seo_arbitrary_tags', function( $arbitrary_tags ) {
-			$pretags = array();
-			$tags = array();
-			$key = WP_SEO()->get_key();
-			if ( is_singular() ) {
-				if ( WP_SEO_Settings()->has_post_fields( $post_type = get_post_type() ) ) {
-					foreach ( $this->fields_to_whitelist as $field ) {
-						$field_string = get_post_meta( get_the_ID(), '_meta_' . $field, true );
-						$pretags[ $field ] = $field_string;
-					}
-				}
-			} elseif ( is_category() || is_tag() || is_tax() ) {
-				if ( WP_SEO_Settings()->has_term_fields( $taxonomy = get_queried_object()->taxonomy )
-					&& $option = get_option( WP_SEO()->get_term_option_name( get_queried_object() ) )
-				) {
-					foreach ( $this->fields_to_whitelist as $field ) {
-						if ( isset( $option[ $field ] ) ) {
-							$field_string = $option[ $field ];
-							$pretags[ $field ] = $field_string;
-						}
-					}
-				}
-			}
-			foreach ( $this->fields_to_whitelist as $field ) {
-				if ( empty( $pretags[ $field ] ) ) {
-					/**
-					 * Filter the format strings of whitelisted custom tags.
-					 *
-					 * @param  string 		The format string retrieved from the settings.
-					 * @param  string $key	The key of the setting retrieved.
-					 */
-					$field_string = apply_filters( 'wp_seo_meta_' . $field . '_format', WP_SEO_Settings()->get_option( $key . '_' . $field ), $key );
-					$meta_field_value = WP_SEO()->format( $field_string );
-					$pretags[ $field ] = $meta_field_value;
-				} else {
-					$pretags[ $field ] = WP_SEO()->format( $pretags[ $field ] );
-				}
-			}
-			foreach ( $pretags as $key => $value ) {
-				if ( $value && ! is_wp_error( $value ) ) {
-					if ( 'og_image' === $key ) {
-						$og_img_src = wp_get_attachment_image_src( $value, 'og_image' );
-						if ( ! empty( $og_img_src[0] ) ) {
-							$tags[] = array(
-								'name' => $key,
-								'content' => $og_img_src[0],
-							);
-						}
-					} else {
-						$tags[] = array(
-							'name' => $key,
-							'content' => $value,
-						);
-					}
-				}
-			}
-			$arbitrary_tags = array_merge(
-				$arbitrary_tags,
-				$tags
-			);
-			return $arbitrary_tags;
-		} );
-	}
-
-	/**
-	 * Additional sanitization for our new fields
-	 *
-	 * @param  array $out The options currently being saved.
-	 * @param  array $in  The options, raw.
-	 * @return array $out The options to save.
-	 */
-	public function sanitize( $out, $in ) {
-		$sanitize_as_text_field = $this->handle_as_text;
-		foreach ( $sanitize_as_text_field as $field ) {
-			$out[ $field ] = isset( $in[ $field ] ) && ( is_string( $in[ $field ] ) || is_integer( $in[ $field ] ) ) ? sanitize_text_field( $in[ $field ] ) : null;
-		}
-		return $out;
 	}
 
 	/**

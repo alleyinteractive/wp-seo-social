@@ -36,6 +36,7 @@ class WP_SEO_Social {
 	 */
 	protected function setup() {
 		if ( class_exists( 'WP_SEO' ) ) :
+			require_once WP_SEO_SOCIAL_PATH . '/php/class-wp-seo-social-wp-seo-filters.php';
 			require_once WP_SEO_SOCIAL_PATH . '/php/class-wp-seo-social-settings.php';
 			require_once WP_SEO_SOCIAL_PATH . '/php/social-filters.php';
 			if ( is_admin() ) :
