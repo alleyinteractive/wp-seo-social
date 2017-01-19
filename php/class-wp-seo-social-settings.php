@@ -157,7 +157,7 @@ class WP_SEO_Social_Settings {
 				if ( $value && ! is_wp_error( $value ) ) {
 					if ( 'og_image' === $key ) {
 						$og_img_src = wp_get_attachment_image_src( $value, 'og_image' );
-						if ( $og_img_src ) {
+						if ( ! empty( $og_img_src[0] ) {
 							$tags[] = array(
 								'name' => $key,
 								'content' => $og_img_src[0],
