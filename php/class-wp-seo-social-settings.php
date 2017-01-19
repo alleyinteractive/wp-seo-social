@@ -129,7 +129,9 @@ class WP_SEO_Social_Settings {
 					}
 				}
 			} elseif ( is_category() || is_tag() || is_tax() ) {
-				if ( WP_SEO_Settings()->has_term_fields( $taxonomy = get_queried_object()->taxonomy ) && $option = get_option( WP_SEO()->get_term_option_name( get_queried_object() ) ) ) {
+				if ( WP_SEO_Settings()->has_term_fields( $taxonomy = get_queried_object()->taxonomy )
+					&& $option = get_option( WP_SEO()->get_term_option_name( get_queried_object() ) )
+				) {
 					foreach ( $this->fields_to_whitelist as $field ) {
 						if ( isset( $option[ $field ] ) ) {
 							$field_string = $option[ $field ];
@@ -157,7 +159,7 @@ class WP_SEO_Social_Settings {
 				if ( $value && ! is_wp_error( $value ) ) {
 					if ( 'og_image' === $key ) {
 						$og_img_src = wp_get_attachment_image_src( $value, 'og_image' );
-						if ( ! empty( $og_img_src[0] ) {
+						if ( ! empty( $og_img_src[0] ) ) {
 							$tags[] = array(
 								'name' => $key,
 								'content' => $og_img_src[0],

@@ -6,7 +6,7 @@
  * @package WP_SEO_Social
  */
 
-// Add Term context
+// Add Term context.
 /**
  * Call printing function for the OG title input for a new term.
  */
@@ -49,7 +49,7 @@ function wp_seo_social_term_id_to_the_add_term_meta_og_type_input() {
 	wp_seo_social_the_meta_og_type_input( null );
 }
 
-// Edit Term context
+// Edit Term context.
 /**
  * Call printing function for the OG title input for an existing term.
  *
@@ -70,7 +70,7 @@ function wp_seo_social_term_id_to_the_edit_term_og_title_character_count( $term 
 	wp_seo_social_the_og_title_character_count( wp_seo_get_the_display_character_count( $term_option['og_title'] ) );
 }
 
-/** * Call printing function for the OG title character count for an existing term.
+/** Call printing function for the OG title character count for an existing term.
  *
  * @param WP_Term $term Term object.
  */
