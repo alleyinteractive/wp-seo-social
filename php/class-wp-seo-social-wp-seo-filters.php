@@ -40,6 +40,8 @@ class WP_SEO_Social_WP_SEO_Filters {
 	}
 	/**
 	 * Filter the WP SEO menu title.
+	 *
+	 * @return Translated and filtered title for menu.
 	 */
 	public function filter_wp_seo_options_page_menu_title() {
 		return __( 'SEO & Social', 'wp-seo-social' );
@@ -58,8 +60,7 @@ class WP_SEO_Social_WP_SEO_Filters {
 			'og_image'         => '',
 			'og_type'          => '',
 		);
-		$array = array_merge( $array, $extra_fields );
-		return $array;
+		return array_merge( $array, $extra_fields );
 	}
 
 	/**
@@ -69,12 +70,13 @@ class WP_SEO_Social_WP_SEO_Filters {
 	 * @return Array of filtered whitelisted fields.
 	 */
 	public function filter_wp_seo_whitelisted_fields( $array ) {
-		$array = array_merge( $array, WP_SEO_Social_Settings()->fields_to_whitelist );
-		return $array;
+		return array_merge( $array, WP_SEO_Social_Settings()->fields_to_whitelist );
 	}
 
 	/**
 	 * Filter the WP SEO metabox heading.
+	 *
+	 * @return Translated and filtered title for metabox.
 	 */
 	public function filter_wp_seo_box_heading() {
 		return __( 'Search & Social Optimization', 'wp-seo-social' );
@@ -91,14 +93,14 @@ class WP_SEO_Social_WP_SEO_Filters {
 		$tags = array();
 		$key = WP_SEO()->get_key();
 		if ( is_singular() ) {
-			if ( WP_SEO_Settings()->has_post_fields( $post_type = get_post_type() ) ) {
+			if ( WP_SEO_Settings()->has_post_fields( get_post_type() ) ) {
 				foreach ( WP_SEO_Social_Settings()->fields_to_whitelist as $field ) {
 					$field_string = get_post_meta( get_the_ID(), '_meta_' . $field, true );
 					$pretags[ $field ] = $field_string;
 				}
 			}
 		} elseif ( is_category() || is_tag() || is_tax() ) {
-			if ( WP_SEO_Settings()->has_term_fields( $taxonomy = get_queried_object()->taxonomy )
+			if ( WP_SEO_Settings()->has_term_fields( get_queried_object()->taxonomy )
 				&& $option = get_option( WP_SEO()->get_term_option_name( get_queried_object() ) )
 			) {
 				foreach ( WP_SEO_Social_Settings()->fields_to_whitelist as $field ) {
@@ -142,11 +144,10 @@ class WP_SEO_Social_WP_SEO_Filters {
 				}
 			}
 		}
-		$arbitrary_tags = array_merge(
+		return array_merge(
 			$arbitrary_tags,
 			$tags
 		);
-		return $arbitrary_tags;
 	}
 
 	/**

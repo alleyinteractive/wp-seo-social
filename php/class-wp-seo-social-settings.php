@@ -588,11 +588,7 @@ class WP_SEO_Social_Settings {
 				$setting['section'],
 				$setting['args']
 			);
-			if ( ! isset( $setting['args']['type'] )
-				|| in_array( $setting['args']['type'], WP_SEO_Settings()->field_types, true )
-			) {
-				$this->handle_as_text[] = $setting['id'];
-			}
+			$this->handle_as_text[] = $setting['id'];
 		}
 	}
 }
