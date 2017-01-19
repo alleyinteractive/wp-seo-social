@@ -31,7 +31,7 @@ function wp_seo_social_term_id_to_the_add_term_meta_og_description_input() {
 /**
  * Call printing function for the OG description character count for a new term.
  */
-function wp_seo_social_term_id_to_the_og_description_character_count() {
+function wp_seo_social_term_id_to_the_add_term_og_description_character_count() {
 	wp_seo_social_the_og_description_character_count( 0 );
 }
 
