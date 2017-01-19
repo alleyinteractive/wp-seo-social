@@ -35,7 +35,7 @@ class WP_SEO_Social {
 	 * Class setup.
 	 */
 	protected function setup() {
-		if ( class_exists( 'WP_SEO' ) ) :
+		if ( class_exists( 'WP_SEO' ) && $this->check_wp_seo_version() ) :
 			require_once WP_SEO_SOCIAL_PATH . '/php/class-wp-seo-social-wp-seo-filters.php';
 			require_once WP_SEO_SOCIAL_PATH . '/php/class-wp-seo-social-settings.php';
 			require_once WP_SEO_SOCIAL_PATH . '/php/social-filters.php';
@@ -47,7 +47,7 @@ class WP_SEO_Social {
 				require_once WP_SEO_SOCIAL_PATH . '/php/admin-template-post.php';
 			endif;
 		else :
-			$this->admin_notices['error'][] = __( 'WP SEO is required to use WP SEO Social', 'wp-seo-social' );
+			$this->_admin_notices['error'][] = __( 'A current version of WP SEO is required to use WP SEO Social', 'wp-seo-social' );
 			add_action( 'admin_notices', array( $this, 'admin_notices' ) );
 			add_action( 'admin_init', array( $this, 'deactivate' ) );
 		endif;
@@ -86,6 +86,16 @@ class WP_SEO_Social {
 		}
 	}
 
+	/**
+	 * Check the WP SEO version to make sure it's > 0.13.
+	 */
+	public function check_wp_seo_version( ) {
+		if ( ! empty( WP_SEO()->plugin_version ) ) {
+			return version_compare( WP_SEO()->plugin_version, '0.13.0', '>=' );
+		} else {
+			return false;
+		}
+	}
 }
 
 /**

@@ -595,7 +595,6 @@ class WP_SEO_Social_Settings {
 			}
 		}
 	}
-
 }
 
 /**
