@@ -164,14 +164,14 @@ EOF;
 		update_post_meta( $post_id, '_meta_og_title', '_custom_meta_og_title' );
 		update_post_meta( $post_id, '_meta_og_description', '_custom_meta_og_description' );
 		update_post_meta( $post_id, '_meta_og_image', $this->attachment_id );
-		update_post_meta( $post_id, '_meta_og_type', '_custom_meta_og_type' );
-		$this->_assert_all_meta( '_custom_meta_og_title', '_custom_meta_og_description', $this->attachment_id, '_custom_meta_og_type' );
+		update_post_meta( $post_id, '_meta_og_type', 'website' );
+		$this->_assert_all_meta( '_custom_meta_og_title', '_custom_meta_og_description', $this->attachment_id, 'website' );
 
 		update_post_meta( $post_id, '_meta_og_title', '#title#' );
 		update_post_meta( $post_id, '_meta_og_description', '#excerpt#' );
 		update_post_meta( $post_id, '_meta_og_image', $this->attachment_id );
-		update_post_meta( $post_id, '_meta_og_type', '#title#' );
-		$this->_assert_all_meta( $post_title, $post_excerpt, $this->attachment_id, $post_title );
+		update_post_meta( $post_id, '_meta_og_type', 'article' );
+		$this->_assert_all_meta( $post_title, $post_excerpt, $this->attachment_id, 'article' );
 	}
 
 	/**
@@ -234,8 +234,8 @@ EOF;
 			'og_title'       => '#term_name#',
 			'og_description' => '#term_description#',
 			'og_image'       => $new_attachment_id,
-			'og_type'        => '#term_name#',
+			'og_type'        => 'website',
 		) );
-		$this->_assert_all_meta( $term_name, $term_description, $new_attachment_id, $term_name );
+		$this->_assert_all_meta( $term_name, $term_description, $new_attachment_id, 'website' );
 	}
 }
