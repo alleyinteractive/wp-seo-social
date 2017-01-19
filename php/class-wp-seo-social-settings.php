@@ -98,7 +98,7 @@ class WP_SEO_Social_Settings {
 		}
 		add_filter( 'wp_seo_sanitize', array( $this, 'sanitize' ), 10, 2 );
 		add_filter( 'wp_seo_options_page_menu_title', function() {
-			return __( 'SEO & Social', 'wp-seo' );
+			return __( 'SEO & Social', 'wp-seo-social' );
 		});
 		add_filter( 'wp_seo_intersect_term_option', function( $array ) {
 			$extra_fields = array(
@@ -115,7 +115,7 @@ class WP_SEO_Social_Settings {
 			return $array;
 		});
 		add_filter( 'wp_seo_box_heading', function( $heading ) {
-			return __( 'Search & Social Optimization', 'wp-seo' );
+			return __( 'Search & Social Optimization', 'wp-seo-social' );
 		} );
 		add_filter( 'wp_seo_arbitrary_tags', function( $arbitrary_tags ) {
 			$pretags = array();
@@ -287,7 +287,7 @@ class WP_SEO_Social_Settings {
 			),
 			array(
 				'section'  => 'social_taxonomies',
-				'title'    => __( 'Social Taxonomies', 'wp-seo' ),
+				'title'    => __( 'Social Taxonomies', 'wp-seo-social' ),
 				'callback' => '__return_false',
 			),
 		);
@@ -353,7 +353,7 @@ class WP_SEO_Social_Settings {
 			),
 			array(
 				'id'       => 'social_taxonomies',
-				'title'    => __( 'Add social fields to individual:', 'wp-seo' ),
+				'title'    => __( 'Add social fields to individual:', 'wp-seo-social' ),
 				'section'  => 'social_taxonomies',
 				'args'     => array(
 					'field' => 'taxonomies',

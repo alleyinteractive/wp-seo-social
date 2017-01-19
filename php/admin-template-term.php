@@ -11,7 +11,7 @@
 function wp_seo_social_generate_heading() {
 	echo sprintf(
 		'<h4>%1$s</h4>',
-		esc_html( __( 'Open Graph', 'wp-seo' ) )
+		esc_html( __( 'Open Graph', 'wp-seo-social' ) )
 	);
 }
 

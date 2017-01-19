@@ -10,7 +10,7 @@
  */
 function wp_seo_social_the_meta_og_description_label() {
 	?>
-	<label for="wp_seo_meta_og_description"><?php esc_html_e( 'Open Graph Description', 'wp-seo' ); ?></label>
+	<label for="wp_seo_meta_og_description"><?php esc_html_e( 'Open Graph Description', 'wp-seo-social' ); ?></label>
 	<?php
 }
 
@@ -33,10 +33,10 @@ function wp_seo_social_the_meta_og_description_input( $value ) {
 function wp_seo_social_the_og_description_character_count( $count ) {
 	?>
 	<p>
-		<?php esc_html_e( 'OG description character count: ', 'wp-seo' ); ?>
+		<?php esc_html_e( 'OG description character count: ', 'wp-seo-social' ); ?>
 		<span class="og_description-character-count"></span>
 		<?php /* translators: %d: description character count */ ?>
-		<noscript><?php echo esc_html( sprintf( __( '%d (save changes to update)', 'wp-seo' ), $count ) ); ?></noscript>
+		<noscript><?php echo esc_html( sprintf( __( '%d (save changes to update)', 'wp-seo-social' ), $count ) ); ?></noscript>
 	</p>
 	<?php
 }
@@ -46,7 +46,7 @@ function wp_seo_social_the_og_description_character_count( $count ) {
  */
 function wp_seo_social_the_meta_og_image_label() {
 	?>
-	<label for="wp_seo_meta_og_image"><?php esc_html_e( 'Open Graph Image', 'wp-seo' ); ?></label>
+	<label for="wp_seo_meta_og_image"><?php esc_html_e( 'Open Graph Image', 'wp-seo-social' ); ?></label>
 <?php }
 
 /**
@@ -66,7 +66,7 @@ function wp_seo_social_the_meta_og_image_input( $value ) {
  */
 function wp_seo_social_the_meta_og_type_label() {
 	?>
-	<label for="wp_seo_meta_og_type"><?php esc_html_e( 'Open Graph Type', 'wp-seo' ); ?></label>
+	<label for="wp_seo_meta_og_type"><?php esc_html_e( 'Open Graph Type', 'wp-seo-social' ); ?></label>
 <?php }
 
 /**
@@ -90,7 +90,7 @@ function wp_seo_social_the_meta_og_type_input( $value ) {
  */
 function wp_seo_social_the_meta_og_title_label() {
 	?>
-	<label for="wp_seo_meta_og_title"><?php esc_html_e( 'Open Graph Title Tag', 'wp-seo' ); ?></label>
+	<label for="wp_seo_meta_og_title"><?php esc_html_e( 'Open Graph Title Tag', 'wp-seo-social' ); ?></label>
 <?php }
 
 /**
@@ -112,10 +112,10 @@ function wp_seo_social_the_meta_og_title_input( $value ) {
 function wp_seo_social_the_og_title_character_count( $count ) {
 	?>
 	<p>
-		<?php esc_html_e( 'Open Graph Title character count: ', 'wp-seo' ); ?>
+		<?php esc_html_e( 'Open Graph Title character count: ', 'wp-seo-social' ); ?>
 		<span class="og_title-character-count"></span>
 		<?php /* translators: %d: title character count */ ?>
-		<noscript><?php echo esc_html( sprintf( __( '%d (save changes to update)', 'wp-seo' ), $count ) ); ?></noscript>
+		<noscript><?php echo esc_html( sprintf( __( '%d (save changes to update)', 'wp-seo-social' ), $count ) ); ?></noscript>
 	</p>
 	<?php
 }
