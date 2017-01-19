@@ -685,9 +685,6 @@ class WP_SEO_Social_Settings {
 				$setting['args']
 			);
 			if ( ! isset( $setting['args']['type'] )
-				|| 'textarea' === $setting['args']['type']
-				|| 'dropdown' === $setting['args']['type']
-				|| 'image' === $setting['args']['type']
 				|| ! in_array( $setting['args']['type'], WP_SEO_Settings()->field_types, true )
 			) {
 				$this->handle_as_text[] = $setting['id'];
