@@ -31,6 +31,7 @@ class WP_SEO_Social_WP_SEO_Filters {
 	 * Setup the class
 	 */
 	protected function setup() {
+		add_filter( 'wp_seo_sanitize_as_integer', array( $this, 'filter_wp_seo_sanitize_as_integer_field' ) );
 		add_filter( 'wp_seo_sanitize_as_text_field', array( $this, 'filter_wp_seo_sanitize_as_text_field' ) );
 		add_filter( 'wp_seo_whitelisted_settings', array( $this, 'filter_wp_seo_whitelisted_settings' ) );
 		add_filter( 'wp_seo_options_page_menu_title', array( $this, 'filter_wp_seo_options_page_menu_title' ) );
@@ -65,6 +66,33 @@ class WP_SEO_Social_WP_SEO_Filters {
 	}
 
 	/**
+	 * Fields for integer sanitization.
+	 *
+	 * @return array Fields for sanitization.
+	 */
+	public function filter_wp_seo_sanitize_as_integer_field() {
+		$sanitize_as_integer = array(
+			'home_og_image',
+		);
+		foreach ( WP_SEO_Settings()->single_post_types as $type ) {
+			$sanitize_as_integer[] = "single_{$type->name}_og_image";
+		}
+		// Post type, taxonomy, and other archives.
+		foreach ( array_merge( WP_SEO_Settings()->archived_post_types, WP_SEO_Settings()->taxonomies ) as $type ) {
+			if ( is_object( $type ) ) {
+				$type = $type->name;
+			}
+			$sanitize_as_integer[] = "archive_{$type}_og_image";
+		}
+
+		foreach ( array( 'search', '404', 'archive_author' ) as $type ) {
+			$sanitize_as_integer[] = "{$type}_og_image";
+		}
+
+		return $sanitize_as_integer;
+	}
+
+	/**
 	 * Fields for text field sanitization.
 	 *
 	 * @return array Fields for sanitization.
@@ -73,13 +101,11 @@ class WP_SEO_Social_WP_SEO_Filters {
 		$sanitize_as_text_field = array(
 			'home_og_title',
 			'home_og_description',
-			'home_og_image',
 			'home_og_type',
 		);
 		foreach ( WP_SEO_Settings()->single_post_types as $type ) {
 			$sanitize_as_text_field[] = "single_{$type->name}_og_title";
 			$sanitize_as_text_field[] = "single_{$type->name}_og_description";
-			$sanitize_as_text_field[] = "single_{$type->name}_og_image";
 			$sanitize_as_text_field[] = "single_{$type->name}_og_type";
 		}
 		// Post type, taxonomy, and other archives.
@@ -89,15 +115,13 @@ class WP_SEO_Social_WP_SEO_Filters {
 			}
 			$sanitize_as_text_field[] = "archive_{$type}_og_title";
 			$sanitize_as_text_field[] = "archive_{$type}_og_description";
-			$sanitize_as_text_field[] = "archive_{$type}_og_image";
 			$sanitize_as_text_field[] = "archive_{$type}_og_type";
 		}
 
-		foreach ( array( 'search', '404' ) as $type ) {
+		foreach ( array( 'search', '404', 'archive_author' ) as $type ) {
 			$sanitize_as_text_field[] = "{$type}_og_title";
 			$sanitize_as_text_field[] = "{$type}_og_description";
 			$sanitize_as_text_field[] = "{$type}_og_type";
-			$sanitize_as_text_field[] = "{$type}_og_image";
 		}
 
 		return $sanitize_as_text_field;
