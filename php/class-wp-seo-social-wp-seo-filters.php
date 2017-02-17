@@ -200,28 +200,26 @@ class WP_SEO_Social_WP_SEO_Filters {
 				 * @param  string $key	The key of the setting retrieved.
 				 */
 				$field_string = apply_filters( 'wp_seo_meta_' . $field . '_format', WP_SEO_Settings()->get_option( $key . '_' . $field ), $key );
-				$meta_field_value = WP_SEO()->format( $field_string );
-				$pretags[ $field ] = $meta_field_value;
+				$pretags[ $field ] = $field_string;
+			}
+			// Format all but the og image tags.
+			if ( 'og_image' === $field ) {
+				$og_img_src = wp_get_attachment_image_src( $pretags[ $field ], 'og_image' );
+				if ( ! empty( $og_img_src ) ) {
+					$pretags[ $field ] = $og_img_src[0];
+				} else {
+					$pretags[ $field ] = false;
+				}
 			} else {
 				$pretags[ $field ] = WP_SEO()->format( $pretags[ $field ] );
 			}
 		}
 		foreach ( $pretags as $key => $value ) {
 			if ( $value && ! is_wp_error( $value ) ) {
-				if ( 'og_image' === $key ) {
-					$og_img_src = wp_get_attachment_image_src( $value, 'og_image' );
-					if ( ! empty( $og_img_src[0] ) ) {
-						$tags[] = array(
-							'name' => $key,
-							'content' => $og_img_src[0],
-						);
-					}
-				} else {
-					$tags[] = array(
-						'name' => $key,
-						'content' => $value,
-					);
-				}
+				$tags[] = array(
+					'name' => $key,
+					'content' => $value,
+				);
 			}
 		}
 		return array_merge(
