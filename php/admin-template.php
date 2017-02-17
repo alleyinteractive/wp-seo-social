@@ -58,7 +58,7 @@ function wp_seo_social_the_meta_og_image_input( $value ) {
 	$og_image_args = array(
 		'field' => 'og_image',
 	);
-	WP_SEO_Settings()->render_image_field( $og_image_args, $value, 'seo_meta' );
+	WP_SEO_Fields()->render_image_field( $og_image_args, $value, 'seo_meta' );
 }
 
 /**
@@ -82,7 +82,7 @@ function wp_seo_social_the_meta_og_type_input( $value ) {
 			'article' => 'Article',
 		),
 	);
-	WP_SEO_Settings()->render_dropdown( $og_type_args, $value, 'seo_meta' );
+	WP_SEO_Fields()->render_dropdown( $og_type_args, $value, 'seo_meta' );
 }
 
 /**
