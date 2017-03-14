@@ -5,7 +5,11 @@
  * @package WP_SEO_Social
  */
 
-/* Add an image size for Facebook OG Images */
+/*
+ * Add an image size for Facebook OG Images.
+ * Based on ratio of 1.91:1.
+ * https://developers.facebook.com/docs/sharing/best-practices
+ */
 add_image_size( 'og_image', 2400, 1260, true );
 
 /* Hook into WP SEO first to add our fields */
