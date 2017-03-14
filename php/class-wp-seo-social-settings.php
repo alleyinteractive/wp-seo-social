@@ -583,7 +583,7 @@ class WP_SEO_Social_Settings {
 			add_settings_field(
 				$setting['id'],
 				$setting['title'],
-				array( 'WP_SEO_Settings', 'field' ),
+				array( WP_SEO_Fields(), 'field' ),
 				'wp-seo',
 				$setting['section'],
 				$setting['args']
