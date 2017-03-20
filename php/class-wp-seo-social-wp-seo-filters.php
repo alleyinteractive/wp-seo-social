@@ -108,14 +108,24 @@ class WP_SEO_Social_WP_SEO_Filters {
 			$sanitize_as_text_field[] = "single_{$type->name}_og_description";
 			$sanitize_as_text_field[] = "single_{$type->name}_og_type";
 		}
-		// Post type, taxonomy, and other archives.
-		foreach ( array_merge( WP_SEO_Settings()->archived_post_types, WP_SEO_Settings()->taxonomies ) as $type ) {
+		// Post type and other archives.
+		foreach ( array_merge( WP_SEO_Settings()->archived_post_types ) as $type ) {
 			if ( is_object( $type ) ) {
 				$type = $type->name;
 			}
 			$sanitize_as_text_field[] = "archive_{$type}_og_title";
 			$sanitize_as_text_field[] = "archive_{$type}_og_description";
 			$sanitize_as_text_field[] = "archive_{$type}_og_type";
+		}
+
+		// Taxonomy archives.
+		foreach ( WP_SEO_Settings()->taxonomies as $type ) {
+			if ( is_object( $type ) ) {
+				$type = $type->name;
+			}
+			$sanitize_as_text_field[] = "taxonomy_{$type}_og_title";
+			$sanitize_as_text_field[] = "taxonomy_{$type}_og_description";
+			$sanitize_as_text_field[] = "taxonomy_{$type}_og_type";
 		}
 
 		foreach ( array( 'search', '404', 'archive_author' ) as $type ) {
