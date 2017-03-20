@@ -117,7 +117,7 @@ class WP_SEO_Social_WP_SEO_Filters {
 			$sanitize_as_text_field[] = "single_{$type->name}_og_type";
 		}
 		// Post type and other archives.
-		foreach ( array_merge( WP_SEO_Settings()->archived_post_types ) as $type ) {
+		foreach ( WP_SEO_Settings()->archived_post_types as $type ) {
 			if ( is_object( $type ) ) {
 				$type = $type->name;
 			}
