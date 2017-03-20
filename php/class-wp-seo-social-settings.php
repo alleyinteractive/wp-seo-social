@@ -438,37 +438,37 @@ class WP_SEO_Social_Settings {
 				$taxonomy_settings,
 				array(
 					array(
-						'id'       => 'archive_' . $taxonomy->name . '_og_title',
+						'id'       => 'taxonomy_' . $taxonomy->name . '_og_title',
 						'title'    => __( 'Open Graph Title Tag Format', 'wp-seo-social' ),
-						'section'  => 'archive_' . $taxonomy->name,
+						'section'  => 'taxonomy_' . $taxonomy->name,
 						'args'     => array(
-							'field' => 'archive_' . $taxonomy->name . '_og_title',
+							'field' => 'taxonomy_' . $taxonomy->name . '_og_title',
 						),
 					),
 					array(
-						'id'       => 'archive_' . $taxonomy->name . '_og_description',
+						'id'       => 'taxonomy_' . $taxonomy->name . '_og_description',
 						'title'    => __( 'Open Graph Description Tag Format', 'wp-seo-social' ),
-						'section'  => 'archive_' . $taxonomy->name,
+						'section'  => 'taxonomy_' . $taxonomy->name,
 						'args'     => array(
-							'field' => 'archive_' . $taxonomy->name . '_og_description',
+							'field' => 'taxonomy_' . $taxonomy->name . '_og_description',
 							'type'  => 'textarea',
 						),
 					),
 					array(
-						'id'       => 'archive_' . $taxonomy->name . '_og_image',
+						'id'       => 'taxonomy_' . $taxonomy->name . '_og_image',
 						'title'    => __( 'Open Graph Image', 'wp-seo-social' ),
-						'section'  => 'archive_' . $taxonomy->name,
+						'section'  => 'taxonomy_' . $taxonomy->name,
 						'args'     => array(
-							'field' => 'archive_' . $taxonomy->name . '_og_image',
+							'field' => 'taxonomy_' . $taxonomy->name . '_og_image',
 							'type'  => 'image',
 						),
 					),
 					array(
-						'id'       => 'archive_' . $taxonomy->name . '_og_type',
+						'id'       => 'taxonomy_' . $taxonomy->name . '_og_type',
 						'title'    => __( 'Open Graph Type', 'wp-seo-social' ),
-						'section'  => 'archive_' . $taxonomy->name,
+						'section'  => 'taxonomy_' . $taxonomy->name,
 						'args'     => array(
-							'field' => 'archive_' . $taxonomy->name . '_og_type',
+							'field' => 'taxonomy_' . $taxonomy->name . '_og_type',
 							'type'  => 'dropdown',
 							'boxes' => array(
 								'website' => 'Website',
