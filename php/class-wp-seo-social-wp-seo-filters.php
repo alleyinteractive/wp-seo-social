@@ -190,7 +190,7 @@ class WP_SEO_Social_WP_SEO_Filters {
 		$pretags = array();
 		$tags = array();
 		global $wp_query;
-		$key = wp_seo_settings()->get_key( $wp_query );
+		$key = WP_SEO_Settings()->get_key( $wp_query );
 		if ( is_singular() ) {
 			if ( WP_SEO_Settings()->has_post_fields( get_post_type() ) ) {
 				foreach ( WP_SEO_Social_Settings()->fields_to_whitelist as $field ) {
