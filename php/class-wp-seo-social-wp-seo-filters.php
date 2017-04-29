@@ -236,7 +236,7 @@ class WP_SEO_Social_WP_SEO_Filters {
 		foreach ( $pretags as $key => $value ) {
 			if ( $value && ! is_wp_error( $value ) ) {
 				$tags[] = array(
-					'name' => $key,
+					'name' => str_replace( 'og_', 'og:', $key ),
 					'content' => $value,
 				);
 			}
