@@ -90,8 +90,8 @@ class WP_SEO_Social {
 	 * Check the WP SEO version to make sure it's > 0.13.
 	 */
 	public function check_wp_seo_version( ) {
-		if ( ! empty( WP_SEO()->plugin_version ) ) {
-			return version_compare( WP_SEO()->plugin_version, '0.13.0', '>=' );
+		if ( defined( 'WP_SEO_VERSION' ) ) {
+			return version_compare( WP_SEO_VERSION, '0.13.0', '>=' );
 		} else {
 			return false;
 		}
