@@ -39,7 +39,7 @@ class WP_SEO_Social_WP_SEO_Filters {
 				'sanitize_callback' => 'sanitize_text_field',
 			) );
 			wp_seo()->register_meta( 'og_image', array(
-				'sanitize_callback' => 'wp_seo_sanitize_image_field',
+				'sanitize_callback' => 'wp_seo_sanitize_integer_field',
 			) );
 			wp_seo()->register_meta( 'og_type', array(
 				'sanitize_callback' => 'sanitize_text_field',
