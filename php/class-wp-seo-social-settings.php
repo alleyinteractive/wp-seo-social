@@ -44,6 +44,15 @@ class WP_SEO_Social_Settings {
 	private $taxonomies = array();
 
 	/**
+	 * Fields that are classified as text fields
+	 *
+	 * @see  WP_SEO_Social_Settings::register_settings().
+	 *
+	 * @var array Field ID's.
+	 */
+	public $handle_as_text = array();
+
+	/**
 	 * WP SEO Social fields.
 	 *
 	 * @var array Field IDs.
