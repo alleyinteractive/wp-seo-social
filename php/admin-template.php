@@ -57,8 +57,9 @@ function wp_seo_social_the_meta_og_image_label() {
 function wp_seo_social_the_meta_og_image_input( $value ) {
 	$og_image_args = array(
 		'field' => 'og_image',
+		'slug'  => 'seo_meta',
 	);
-	WP_SEO_Fields()->render_image_field( $og_image_args, $value, 'seo_meta' );
+	WP_SEO_Fields()->render_image_field( $og_image_args, $value );
 }
 
 /**
