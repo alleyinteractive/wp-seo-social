@@ -174,18 +174,16 @@ class WP_SEO_Social_WP_SEO_Filters {
 		if ( is_singular() ) {
 			if ( WP_SEO_Settings()->has_post_fields( get_post_type() ) ) {
 				foreach ( WP_SEO_Social_Settings()->wp_seo_social_fields as $field ) {
-					$field_string = get_post_meta( get_the_ID(), '_meta_' . $field, true );
+					$field_string = get_post_meta( get_the_ID(), $field, true );
 					$pretags[ $field ] = $field_string;
 				}
 			}
 		} elseif ( is_category() || is_tag() || is_tax() ) {
-			if ( WP_SEO_Settings()->has_term_fields( get_queried_object()->taxonomy )
-				&& $option = get_option( WP_SEO()->get_term_option_name( get_queried_object() ) )
-			) {
+			if ( WP_SEO_Settings()->has_term_fields( get_queried_object()->taxonomy ) ) {
 				foreach ( WP_SEO_Social_Settings()->wp_seo_social_fields as $field ) {
-					if ( isset( $option[ $field ] ) ) {
-						$field_string = $option[ $field ];
-						$pretags[ $field ] = $field_string;
+					$value = get_term_meta( get_queried_object()->term_id, $field, true );
+					if ( $value ) {
+						$pretags[ $field ] = $value;
 					}
 				}
 			}
