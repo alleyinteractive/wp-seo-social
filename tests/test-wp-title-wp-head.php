@@ -115,10 +115,10 @@ class WP_SEO_Social_WP_Head_Tests extends WP_UnitTestCase {
 	function _assert_all_meta( $og_title, $og_description, $og_image, $og_type ) {
 		$og_img_src = wp_get_attachment_image_url( $og_image, 'og_image' );
 		$expected = <<<EOF
-<meta name='og_title' content='{$og_title}' /><!-- WP SEO -->
-<meta name='og_description' content='{$og_description}' /><!-- WP SEO -->
-<meta name='og_image' content='{$og_img_src}' /><!-- WP SEO -->
-<meta name='og_type' content='{$og_type}' /><!-- WP SEO -->
+<meta name='og:title' content='{$og_title}' /><!-- WP SEO -->
+<meta name='og:description' content='{$og_description}' /><!-- WP SEO -->
+<meta name='og:image' content='{$og_img_src}' /><!-- WP SEO -->
+<meta name='og:type' content='{$og_type}' /><!-- WP SEO -->
 EOF;
 		$this->assertSame( strip_ws( $expected ), strip_ws( get_echo( array( WP_SEO(), 'wp_head' ) ) ) );
 	}
