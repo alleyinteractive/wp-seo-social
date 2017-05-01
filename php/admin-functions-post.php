@@ -12,7 +12,7 @@
  * @param int $post_id Post ID.
  */
 function wp_seo_social_post_id_to_the_post_meta_og_title_input( $post_id ) {
-	wp_seo_social_the_meta_og_title_input( get_post_meta( $post_id, '_meta_og_title', true ) );
+	wp_seo_social_the_meta_og_title_input( get_post_meta( $post_id, 'og_title', true ) );
 }
 
 /**
@@ -21,7 +21,7 @@ function wp_seo_social_post_id_to_the_post_meta_og_title_input( $post_id ) {
  * @param int $post_id Post ID.
  */
 function wp_seo_social_post_id_to_the_post_og_title_character_count( $post_id ) {
-	wp_seo_social_the_og_title_character_count( strlen( get_post_meta( $post_id, '_meta_og_title', true ) ) );
+	wp_seo_social_the_og_title_character_count( strlen( get_post_meta( $post_id, 'og_title', true ) ) );
 }
 
 /**
@@ -30,7 +30,7 @@ function wp_seo_social_post_id_to_the_post_og_title_character_count( $post_id ) 
  * @param int $post_id Post ID.
  */
 function wp_seo_social_post_id_to_the_post_meta_og_description_input( $post_id ) {
-	wp_seo_social_the_meta_og_description_input( get_post_meta( $post_id, '_meta_og_description', true ) );
+	wp_seo_social_the_meta_og_description_input( get_post_meta( $post_id, 'og_description', true ) );
 }
 
 /**
@@ -39,7 +39,7 @@ function wp_seo_social_post_id_to_the_post_meta_og_description_input( $post_id )
  * @param int $post_id Post ID.
  */
 function wp_seo_social_post_id_to_the_post_og_description_character_count( $post_id ) {
-	wp_seo_social_the_og_description_character_count( strlen( get_post_meta( $post_id, '_meta_og_description', true ) ) );
+	wp_seo_social_the_og_description_character_count( strlen( get_post_meta( $post_id, 'og_description', true ) ) );
 }
 
 /**
@@ -48,7 +48,7 @@ function wp_seo_social_post_id_to_the_post_og_description_character_count( $post
  * @param int $post_id Post ID.
  */
 function wp_seo_social_post_id_to_the_post_meta_og_image_input( $post_id ) {
-	wp_seo_social_the_meta_og_image_input( get_post_meta( $post_id, '_meta_og_image', true ) );
+	wp_seo_social_the_meta_og_image_input( get_post_meta( $post_id, 'og_image', true ) );
 }
 
 /**
@@ -57,6 +57,6 @@ function wp_seo_social_post_id_to_the_post_meta_og_image_input( $post_id ) {
  * @param int $post_id Post ID.
  */
 function wp_seo_social_post_id_to_the_post_meta_og_type_input( $post_id ) {
-	wp_seo_social_the_meta_og_type_input( get_post_meta( $post_id, '_meta_og_type', true ) );
+	wp_seo_social_the_meta_og_type_input( get_post_meta( $post_id, 'og_type', true ) );
 }
 

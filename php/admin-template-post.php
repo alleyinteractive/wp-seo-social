@@ -14,7 +14,7 @@ function wp_seo_social_the_meta_fields( $post ) {
 	$slug = 'post';
 	wp_seo_social_table_opening_markup( $slug );
 	wp_seo_social_generate_heading();
-	foreach ( WP_SEO_Social_Settings()->fields_to_whitelist as $field ) :
+	foreach ( WP_SEO_Social_Settings()->wp_seo_social_fields as $field ) :
 		wp_seo_social_generate_field_markup( $slug, $field, $post );
 	endforeach;
 	wp_seo_social_table_closing_markup();

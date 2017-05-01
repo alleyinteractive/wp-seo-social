@@ -53,11 +53,11 @@ class WP_SEO_Social_Settings {
 	public $handle_as_text = array();
 
 	/**
-	 * Fields to whitelist.
+	 * WP SEO Social fields.
 	 *
-	 * @var array Field ID's to whitelist.
+	 * @var array Field IDs.
 	 */
-	public $fields_to_whitelist = array(
+	public $wp_seo_social_fields = array(
 		'og_title',
 		'og_description',
 		'og_image',
@@ -165,7 +165,7 @@ class WP_SEO_Social_Settings {
 		$this->default_options = apply_filters(
 			'wp_seo_social_default_options',
 			array(
-			'post_types' => array_keys( $this->single_post_types ),
+				'post_types' => array_keys( $this->single_post_types ),
 				'taxonomies' => array_keys( $this->taxonomies ),
 			)
 		);

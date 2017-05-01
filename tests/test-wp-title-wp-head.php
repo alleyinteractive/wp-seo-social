@@ -115,10 +115,10 @@ class WP_SEO_Social_WP_Head_Tests extends WP_UnitTestCase {
 	function _assert_all_meta( $og_title, $og_description, $og_image, $og_type ) {
 		$og_img_src = wp_get_attachment_image_url( $og_image, 'og_image' );
 		$expected = <<<EOF
-<meta name='og_title' content='{$og_title}' /><!-- WP SEO -->
-<meta name='og_description' content='{$og_description}' /><!-- WP SEO -->
-<meta name='og_image' content='{$og_img_src}' /><!-- WP SEO -->
-<meta name='og_type' content='{$og_type}' /><!-- WP SEO -->
+<meta name='og:title' content='{$og_title}' /><!-- WP SEO -->
+<meta name='og:description' content='{$og_description}' /><!-- WP SEO -->
+<meta name='og:image' content='{$og_img_src}' /><!-- WP SEO -->
+<meta name='og:type' content='{$og_type}' /><!-- WP SEO -->
 EOF;
 		$this->assertSame( strip_ws( $expected ), strip_ws( get_echo( array( WP_SEO(), 'wp_head' ) ) ) );
 	}
@@ -161,16 +161,16 @@ EOF;
 		) );
 
 		$this->go_to( get_permalink( $post_id ) );
-		update_post_meta( $post_id, '_meta_og_title', '_custom_meta_og_title' );
-		update_post_meta( $post_id, '_meta_og_description', '_custom_meta_og_description' );
-		update_post_meta( $post_id, '_meta_og_image', $this->attachment_id );
-		update_post_meta( $post_id, '_meta_og_type', 'website' );
+		update_post_meta( $post_id, 'og_title', '_custom_meta_og_title' );
+		update_post_meta( $post_id, 'og_description', '_custom_meta_og_description' );
+		update_post_meta( $post_id, 'og_image', $this->attachment_id );
+		update_post_meta( $post_id, 'og_type', 'website' );
 		$this->_assert_all_meta( '_custom_meta_og_title', '_custom_meta_og_description', $this->attachment_id, 'website' );
 
-		update_post_meta( $post_id, '_meta_og_title', '#title#' );
-		update_post_meta( $post_id, '_meta_og_description', '#excerpt#' );
-		update_post_meta( $post_id, '_meta_og_image', $this->attachment_id );
-		update_post_meta( $post_id, '_meta_og_type', 'article' );
+		update_post_meta( $post_id, 'og_title', '#title#' );
+		update_post_meta( $post_id, 'og_description', '#excerpt#' );
+		update_post_meta( $post_id, 'og_image', $this->attachment_id );
+		update_post_meta( $post_id, 'og_type', 'article' );
 		$this->_assert_all_meta( $post_title, $post_excerpt, $this->attachment_id, 'article' );
 	}
 
@@ -223,19 +223,15 @@ EOF;
 			0
 		);
 		$this->go_to( get_term_link( $term_id, 'category' ) );
-		update_option( $option_name, array(
-			'og_title'       => '_custom_og_title',
-			'og_description' => '_custom_og_description',
-			'og_image'       => $new_attachment_id,
-			'og_type'        => '_custom_og_type',
-		) );
+		update_term_meta( $term_id, 'og_title', '_custom_og_title' );
+		update_term_meta( $term_id, 'og_description', '_custom_og_description' );
+		update_term_meta( $term_id, 'og_image', $new_attachment_id );
+		update_term_meta( $term_id, 'og_type', '_custom_og_type' );
 		$this->_assert_all_meta( '_custom_og_title', '_custom_og_description', $new_attachment_id, '_custom_og_type' );
-		update_option( $option_name, array(
-			'og_title'       => '#term_name#',
-			'og_description' => '#term_description#',
-			'og_image'       => $new_attachment_id,
-			'og_type'        => 'website',
-		) );
+		update_term_meta( $term_id, 'og_title', '#term_name#' );
+		update_term_meta( $term_id, 'og_description', '#term_description#' );
+		update_term_meta( $term_id, 'og_image', $new_attachment_id );
+		update_term_meta( $term_id, 'og_type', 'website' );
 		$this->_assert_all_meta( $term_name, $term_description, $new_attachment_id, 'website' );
 	}
 }
