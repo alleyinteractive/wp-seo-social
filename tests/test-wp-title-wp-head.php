@@ -161,16 +161,16 @@ EOF;
 		) );
 
 		$this->go_to( get_permalink( $post_id ) );
-		update_post_meta( $post_id, '_meta_og_title', '_custom_meta_og_title' );
-		update_post_meta( $post_id, '_meta_og_description', '_custom_meta_og_description' );
-		update_post_meta( $post_id, '_meta_og_image', $this->attachment_id );
-		update_post_meta( $post_id, '_meta_og_type', 'website' );
+		update_post_meta( $post_id, 'og_title', '_custom_meta_og_title' );
+		update_post_meta( $post_id, 'og_description', '_custom_meta_og_description' );
+		update_post_meta( $post_id, 'og_image', $this->attachment_id );
+		update_post_meta( $post_id, 'og_type', 'website' );
 		$this->_assert_all_meta( '_custom_meta_og_title', '_custom_meta_og_description', $this->attachment_id, 'website' );
 
-		update_post_meta( $post_id, '_meta_og_title', '#title#' );
-		update_post_meta( $post_id, '_meta_og_description', '#excerpt#' );
-		update_post_meta( $post_id, '_meta_og_image', $this->attachment_id );
-		update_post_meta( $post_id, '_meta_og_type', 'article' );
+		update_post_meta( $post_id, 'og_title', '#title#' );
+		update_post_meta( $post_id, 'og_description', '#excerpt#' );
+		update_post_meta( $post_id, 'og_image', $this->attachment_id );
+		update_post_meta( $post_id, 'og_type', 'article' );
 		$this->_assert_all_meta( $post_title, $post_excerpt, $this->attachment_id, 'article' );
 	}
 
