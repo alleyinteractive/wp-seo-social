@@ -36,7 +36,6 @@ class WP_SEO_Social_WP_SEO_Filters {
 		add_filter( 'wp_seo_whitelisted_settings', array( $this, 'filter_wp_seo_whitelisted_settings' ) );
 		add_filter( 'wp_seo_options_page_menu_title', array( $this, 'filter_wp_seo_options_page_menu_title' ) );
 		add_filter( 'wp_seo_intersect_term_option',  array( $this, 'filter_wp_seo_intersect_term_option' ) );
-		add_filter( 'wp_seo_whitelisted_fields', array( $this, 'filter_wp_seo_whitelisted_fields' ) );
 		add_filter( 'wp_seo_box_heading', array( $this, 'filter_wp_seo_box_heading' ) );
 		add_filter( 'wp_seo_arbitrary_tags', array( $this, 'filter_wp_seo_arbitrary_tags' ) );
 	}
@@ -159,16 +158,6 @@ class WP_SEO_Social_WP_SEO_Filters {
 			'og_type'          => '',
 		);
 		return array_merge( $array, $extra_fields );
-	}
-
-	/**
-	 * Filter the whitelisted fields so ours validate.
-	 *
-	 * @param array $array Array of whitelisted fields.
-	 * @return Array of filtered whitelisted fields.
-	 */
-	public function filter_wp_seo_whitelisted_fields( $array ) {
-		return array_merge( $array, WP_SEO_Social_Settings()->fields_to_whitelist );
 	}
 
 	/**
