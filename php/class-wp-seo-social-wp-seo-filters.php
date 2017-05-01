@@ -45,6 +45,8 @@ class WP_SEO_Social_WP_SEO_Filters {
 				'sanitize_callback' => 'sanitize_text_field',
 			) );
 		} );
+		add_filter( 'wp_seo_sanitize_as_integer', array( $this, 'filter_wp_seo_sanitize_as_integer_field' ) );
+		add_filter( 'wp_seo_sanitize_as_text_field', array( $this, 'filter_wp_seo_sanitize_as_text_field' ) );
 		add_filter( 'wp_seo_options_page_menu_title', array( $this, 'filter_wp_seo_options_page_menu_title' ) );
 		add_filter( 'wp_seo_intersect_term_option',  array( $this, 'filter_wp_seo_intersect_term_option' ) );
 		add_filter( 'wp_seo_box_heading', array( $this, 'filter_wp_seo_box_heading' ) );
@@ -57,6 +59,80 @@ class WP_SEO_Social_WP_SEO_Filters {
 	 */
 	public function filter_wp_seo_options_page_menu_title() {
 		return __( 'SEO & Social', 'wp-seo-social' );
+	}
+
+	/**
+	 * Fields for integer sanitization.
+	 *
+	 * @return array Fields for sanitization.
+	 */
+	public function filter_wp_seo_sanitize_as_integer_field() {
+		$sanitize_as_integer = array(
+			'home_og_image',
+		);
+		foreach ( WP_SEO_Settings()->single_post_types as $type ) {
+			$sanitize_as_integer[] = "single_{$type->name}_og_image";
+		}
+		// Post type and other archives.
+		foreach ( WP_SEO_Settings()->archived_post_types as $type ) {
+			if ( is_object( $type ) ) {
+				$type = $type->name;
+			}
+			$sanitize_as_integer[] = "archive_{$type}_og_image";
+		}
+		// Taxonomy archives.
+		foreach ( WP_SEO_Settings()->taxonomies as $type ) {
+			if ( is_object( $type ) ) {
+				$type = $type->name;
+			}
+			$sanitize_as_integer[] = "taxonomy_{$type}_og_image";
+		}
+		foreach ( array( 'search', '404', 'archive_author' ) as $type ) {
+			$sanitize_as_integer[] = "{$type}_og_image";
+		}
+		return $sanitize_as_integer;
+	}
+
+	/**
+	 * Fields for text field sanitization.
+	 *
+	 * @return array Fields for sanitization.
+	 */
+	public function filter_wp_seo_sanitize_as_text_field() {
+		$sanitize_as_text_field = array(
+			'home_og_title',
+			'home_og_description',
+			'home_og_type',
+		);
+		foreach ( WP_SEO_Settings()->single_post_types as $type ) {
+			$sanitize_as_text_field[] = "single_{$type->name}_og_title";
+			$sanitize_as_text_field[] = "single_{$type->name}_og_description";
+			$sanitize_as_text_field[] = "single_{$type->name}_og_type";
+		}
+		// Post type and other archives.
+		foreach ( WP_SEO_Settings()->archived_post_types as $type ) {
+			if ( is_object( $type ) ) {
+				$type = $type->name;
+			}
+			$sanitize_as_text_field[] = "archive_{$type}_og_title";
+			$sanitize_as_text_field[] = "archive_{$type}_og_description";
+			$sanitize_as_text_field[] = "archive_{$type}_og_type";
+		}
+		// Taxonomy archives.
+		foreach ( WP_SEO_Settings()->taxonomies as $type ) {
+			if ( is_object( $type ) ) {
+				$type = $type->name;
+			}
+			$sanitize_as_text_field[] = "taxonomy_{$type}_og_title";
+			$sanitize_as_text_field[] = "taxonomy_{$type}_og_description";
+			$sanitize_as_text_field[] = "taxonomy_{$type}_og_type";
+		}
+		foreach ( array( 'search', '404', 'archive_author' ) as $type ) {
+			$sanitize_as_text_field[] = "{$type}_og_title";
+			$sanitize_as_text_field[] = "{$type}_og_description";
+			$sanitize_as_text_field[] = "{$type}_og_type";
+		}
+		return $sanitize_as_text_field;
 	}
 
 	/**
