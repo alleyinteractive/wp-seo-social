@@ -223,19 +223,15 @@ EOF;
 			0
 		);
 		$this->go_to( get_term_link( $term_id, 'category' ) );
-		update_option( $option_name, array(
-			'og_title'       => '_custom_og_title',
-			'og_description' => '_custom_og_description',
-			'og_image'       => $new_attachment_id,
-			'og_type'        => '_custom_og_type',
-		) );
+		update_term_meta( $term_id, 'og_title', '_custom_og_title' );
+		update_term_meta( $term_id, 'og_description', '_custom_og_description' );
+		update_term_meta( $term_id, 'og_image', $new_attachment_id );
+		update_term_meta( $term_id, 'og_type', '_custom_og_type' );
 		$this->_assert_all_meta( '_custom_og_title', '_custom_og_description', $new_attachment_id, '_custom_og_type' );
-		update_option( $option_name, array(
-			'og_title'       => '#term_name#',
-			'og_description' => '#term_description#',
-			'og_image'       => $new_attachment_id,
-			'og_type'        => 'website',
-		) );
+		update_term_meta( $term_id, 'og_title', '#term_name#' );
+		update_term_meta( $term_id, 'og_description', '#term_description#' );
+		update_term_meta( $term_id, 'og_image', $new_attachment_id );
+		update_term_meta( $term_id, 'og_type', 'website' );
 		$this->_assert_all_meta( $term_name, $term_description, $new_attachment_id, 'website' );
 	}
 }
