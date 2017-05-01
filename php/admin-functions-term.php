@@ -56,8 +56,7 @@ function wp_seo_social_term_id_to_the_add_term_meta_og_type_input() {
  * @param WP_Term $term Term object.
  */
 function wp_seo_social_term_id_to_the_edit_term_meta_og_title_input( $term ) {
-	$term_option = WP_SEO()->intersect_term_option( (array) WP_SEO()->get_term_option( $term->term_id, $term->taxonomy ) );
-	wp_seo_social_the_meta_og_title_input( $term_option['og_title'] );
+	wp_seo_social_the_meta_og_title_input( get_term_meta( $term->term_id, 'og_title', true ) );
 }
 
 /**
@@ -66,8 +65,7 @@ function wp_seo_social_term_id_to_the_edit_term_meta_og_title_input( $term ) {
  * @param WP_Term $term Term object.
  */
 function wp_seo_social_term_id_to_the_edit_term_og_title_character_count( $term ) {
-	$term_option = WP_SEO()->intersect_term_option( (array) WP_SEO()->get_term_option( $term->term_id, $term->taxonomy ) );
-	wp_seo_social_the_og_title_character_count( wp_seo_get_the_display_character_count( $term_option['og_title'] ) );
+	wp_seo_social_the_og_title_character_count( wp_seo_get_the_display_character_count( get_term_meta( $term->term_id, 'og_title', true ) ) );
 }
 
 /** Call printing function for the OG title character count for an existing term.
@@ -75,8 +73,7 @@ function wp_seo_social_term_id_to_the_edit_term_og_title_character_count( $term 
  * @param WP_Term $term Term object.
  */
 function wp_seo_social_term_id_to_the_edit_term_og_description_character_count( $term ) {
-	$term_option = WP_SEO()->intersect_term_option( (array) WP_SEO()->get_term_option( $term->term_id, $term->taxonomy ) );
-	wp_seo_social_the_og_description_character_count( wp_seo_get_the_display_character_count( $term_option['og_description'] ) );
+	wp_seo_social_the_og_description_character_count( wp_seo_get_the_display_character_count( get_term_meta( $term->term_id, 'og_description', true ) ) );
 }
 
 /**
@@ -85,8 +82,7 @@ function wp_seo_social_term_id_to_the_edit_term_og_description_character_count( 
  * @param WP_Term $term Term object.
  */
 function wp_seo_social_term_id_to_the_edit_term_meta_og_description_input( $term ) {
-	$term_option = WP_SEO()->intersect_term_option( (array) WP_SEO()->get_term_option( $term->term_id, $term->taxonomy ) );
-	wp_seo_social_the_meta_og_description_input( $term_option['og_description'] );
+	wp_seo_social_the_meta_og_description_input( get_term_meta( $term->term_id, 'og_description', true ) );
 }
 
 /**
@@ -95,8 +91,7 @@ function wp_seo_social_term_id_to_the_edit_term_meta_og_description_input( $term
  * @param WP_Term $term Term object.
  */
 function wp_seo_social_term_id_to_the_edit_term_meta_og_image_input( $term ) {
-	$term_option = WP_SEO()->intersect_term_option( (array) WP_SEO()->get_term_option( $term->term_id, $term->taxonomy ) );
-	wp_seo_social_the_meta_og_image_input( $term_option['og_image'] );
+	wp_seo_social_the_meta_og_image_input( get_term_meta( $term->term_id, 'og_image', true ) );
 }
 
 /**
@@ -105,6 +100,5 @@ function wp_seo_social_term_id_to_the_edit_term_meta_og_image_input( $term ) {
  * @param WP_Term $term Term object.
  */
 function wp_seo_social_term_id_to_the_edit_term_meta_og_type_input( $term ) {
-	$term_option = WP_SEO()->intersect_term_option( (array) WP_SEO()->get_term_option( $term->term_id, $term->taxonomy ) );
-	wp_seo_social_the_meta_og_type_input( $term_option['og_type'] );
+	wp_seo_social_the_meta_og_type_input( get_term_meta( $term->term_id, 'og_type', true ) );
 }
