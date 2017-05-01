@@ -24,7 +24,7 @@ function wp_seo_social_the_meta_fields_edit_term( $term ) {
 	$slug = 'edit_term';
 	wp_seo_social_edit_term_opening_markup();
 	wp_seo_social_generate_heading();
-	foreach ( WP_SEO_Social_Settings()->fields_to_whitelist as $field ) :
+	foreach ( WP_SEO_Social_Settings()->wp_seo_social_fields as $field ) :
 		wp_seo_social_generate_field_markup_term( $slug, $field, $term );
 	endforeach;
 	wp_seo_social_edit_term_closing_markup();
@@ -53,7 +53,7 @@ function wp_seo_social_the_meta_fields_term() {
 	$slug = 'add_term';
 	wp_seo_social_term_opening_markup();
 	wp_seo_social_generate_heading();
-	foreach ( WP_SEO_Social_Settings()->fields_to_whitelist as $field ) :
+	foreach ( WP_SEO_Social_Settings()->wp_seo_social_fields as $field ) :
 		wp_seo_social_generate_field_markup_term( $slug, $field );
 	endforeach;
 	wp_seo_social_term_closing_markup();
